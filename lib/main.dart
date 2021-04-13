@@ -61,6 +61,16 @@ class _MyHomePageState extends State<HomePage> {
           ),
         ),
       ),
+      builder: (context, navigator) {
+        var lang = Localizations.localeOf(context).languageCode;
+
+        return Theme(
+          data: ThemeData(
+              fontFamily: lang == 'en'? 'RocknRollOne' : ''
+          ),
+          child: navigator,
+        );
+      },
       supportedLocales: [
         Locale('en', ''),
         Locale('si', ''),
