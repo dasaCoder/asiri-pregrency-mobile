@@ -17,7 +17,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<Languages> {
     print('locale ' + locale.languageCode);
     switch (locale.languageCode) {
       case 'en':
-        return LanguageEn();
+        return LanguageSi();
       case 'si':
         return LanguageSi();
       default:

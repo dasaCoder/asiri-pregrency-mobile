@@ -49,6 +49,7 @@ class _MyHomePageState extends State<HomePage> {
     return MaterialApp(
       locale: _locale,
       home: Scaffold(
+        appBar: AppBar(title: Text("title"),),
         drawer: NavDrawer(),
         body: Center(
           child: Column(
@@ -66,7 +67,7 @@ class _MyHomePageState extends State<HomePage> {
 
         return Theme(
           data: ThemeData(
-              fontFamily: lang == 'en'? 'RocknRollOne' : ''
+              fontFamily: lang == 'en'? 'FM_Malit' : 'RocknRollOne'
           ),
           child: navigator,
         );

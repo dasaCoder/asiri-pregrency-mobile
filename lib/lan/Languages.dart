@@ -8,10 +8,17 @@ abstract class Languages {
 
   String get appName;
 
-  String get labelWelcome;
-
-  String get labelInfo;
-
-  String get labelSelectLanguage;
+  // month facts page
+  String get monthFactsTitle;
+  String get monthString;
+  String get first;
+  String get second;
+  String get third;
+  String get fourth;
+  String get fifth;
+  String get sixth;
+  String get seventh;
+  String get eighth;
+  String get nine;
 
 }
