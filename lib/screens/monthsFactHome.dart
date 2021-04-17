@@ -8,12 +8,12 @@ import '../widgets/monthFactIcon.dart';
 class MonthsFactsHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.transparent,
-      // floatingActionButton: SvgPicture.asset("assets/images/factPage/2month.svg"),
-      body: SingleChildScrollView(
-        child: SafeArea(
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        // floatingActionButton: SvgPicture.asset("assets/images/factPage/2month.svg"),
+        body: SingleChildScrollView(
           child: Container(
             decoration: new BoxDecoration(
                 gradient: new RadialGradient(colors: [
@@ -37,8 +37,8 @@ class MonthsFactsHome extends StatelessWidget {
                   ),
                   Container(
                     height: 200,
-                    child: SvgPicture.asset(
-                        "assets/images/factPage/woman_standing.svg"),
+                    child: Image.asset(
+                        "assets/images/factPage/woman_standing.png"),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 20),
@@ -106,8 +106,8 @@ class MonthsFactsHome extends StatelessWidget {
                       children: [
                         Container(
                           margin: EdgeInsets.only(top: 20),
-                          child: SvgPicture.asset(
-                              "assets/images/factPage/2month.svg"),
+                          child: Image.asset(
+                              "assets/images/factPage/2month.png"),
                           height: 50,
                           width: 50,
                         )

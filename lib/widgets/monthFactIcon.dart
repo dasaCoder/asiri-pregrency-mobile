@@ -45,11 +45,10 @@ class _MonthFactIconState extends State<MonthFactIcon> {
               child: Container(
                 height: 75,
                 width: 100,
-                child: SvgPicture.asset(
-                  "assets/images/factPage/${widget.iconPath}.svg",
+                child: Image.asset(
+                  "assets/images/factPage/${widget.iconPath}.png",
                   height: 70,
                   width: 70,
-                  allowDrawingOutsideViewBox: false,
                 ),
               ),
             ),

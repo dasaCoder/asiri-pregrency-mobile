@@ -48,17 +48,19 @@ class _MyHomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       locale: _locale,
-      home: Scaffold(
-        appBar: AppBar(title: Text("title"),),
-        drawer: NavDrawer(),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Languages.of(context).appName",
-              ),
-            ],
+      home: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(title: Text("title"),),
+          drawer: NavDrawer(),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Languages.of(context).appName",
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -16,4 +16,11 @@ class LanguageSi extends Languages {
   String get eighth => "wgjeks";
   String get nine => "kujeks";
 
+  // info menu page
+  String get menuTitle => "Tnf.a fi!LH f;dr;=re wjYH;dj f;darkak ";
+  String get menuOption1 => ".eì‚ iufha§ Tn oek.;hq;= oE ";
+  String get menuOption2 => "Tnf.a úfYaI{ ffjoHjrhd yuqfjuq ";
+  String get menuOption3 => "Tnf.a mjq,a fi!LH fiaúldj yuqfjuq ";
+  String get menuOption4 => ".eì‚ wjÈfhaÈ l<hq;= jHdhdu";
+  String get menuOption5 => "wdisß frdayf,ka ,nd.; yels fiajd";
 }

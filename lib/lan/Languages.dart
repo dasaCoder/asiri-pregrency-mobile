@@ -21,4 +21,12 @@ abstract class Languages {
   String get eighth;
   String get nine;
 
+  // info menu page
+  String get menuTitle;
+  String get menuOption1;
+  String get menuOption2;
+  String get menuOption3;
+  String get menuOption4;
+  String get menuOption5;
+
 }

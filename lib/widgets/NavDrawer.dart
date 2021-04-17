@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/main.dart';
+import 'package:mother_and_baby/screens/infoMenu.dart';
 import 'package:mother_and_baby/screens/monthsFactHome.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -39,7 +40,11 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Settings'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => InfoMenu()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.border_color),
