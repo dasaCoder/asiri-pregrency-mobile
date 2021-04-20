@@ -32,6 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.5
   flutter_svg: ^0.21.0+1
+  video_player: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,7 @@ flutter:
     - assets/images/
     - assets/images/factPage/
     - assets/images/menu/
+    - assets/images/lan/sin/
     - assets/fonts/
 
   fonts:

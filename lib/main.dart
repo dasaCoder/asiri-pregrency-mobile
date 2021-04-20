@@ -71,7 +71,7 @@ class _MyHomePageState extends State<HomePage> {
           data: ThemeData(
               fontFamily: lang == 'en'? 'FM_Malit' : 'RocknRollOne'
           ),
-          child: navigator,
+          child: SafeArea(child: navigator),
         );
       },
       supportedLocales: [

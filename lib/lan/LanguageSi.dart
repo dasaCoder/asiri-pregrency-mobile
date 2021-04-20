@@ -23,4 +23,12 @@ class LanguageSi extends Languages {
   String get menuOption3 => "Tnf.a mjq,a fi!LH fiaúldj yuqfjuq ";
   String get menuOption4 => ".eì‚ wjÈfhaÈ l<hq;= jHdhdu";
   String get menuOption5 => "wdisß frdayf,ka ,nd.; yels fiajd";
+
+  // specialist pages
+  String get specialistTopic => "Tnf.a úfYaI{ ffjoHjrhd yuqfjuq";
+  String get specialistCaption1 => ".¾NŒ iufha uqL fi!LH wdrlaId lr.kafka flfiao@";
+  String get specialistCaption2 => "iaNdúl ore m%iQ;shla ms<sn|j";
+  String get specialistCaption3 => ".¾NŒ ndjh;a iu. we;sjk Èhjeähd ;;a;ajh";
+  String get specialistCaption4 => "uõ moúh ,eîug n,dfmdfrd;a;= jk Tng Wmfoia";
+  String get specialistCaption5 => "isfiaßhka ie;alu ms<snoj";
 }

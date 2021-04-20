@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/screens/monthsFactHome.dart';
+import 'package:mother_and_baby/screens/specialistPage.dart';
 
 class MenuItem extends StatelessWidget {
   final String iconName;
@@ -17,6 +18,10 @@ class MenuItem extends StatelessWidget {
         case "icon_item1":
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => MonthsFactsHome()));
+          break;
+          case "icon_item2":
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => SpecialistPage()));
           break;
       }
     }
@@ -43,14 +48,14 @@ class MenuItem extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   color: Color(boxColor)),
-              padding: EdgeInsets.all(2),
+              padding: EdgeInsets.only(left: 2, right: 2, top: 5, bottom: 5),
               child: Center(
                 child: Text(
                   text,
                   textAlign: TextAlign.center,
                   style: new TextStyle(
                     fontSize: 16.0,
-                    color: Colors.white,
+                    color: Color(0xFF002736),
                   ),
                 ),
               ),

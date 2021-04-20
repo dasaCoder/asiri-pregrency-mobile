@@ -29,4 +29,12 @@ abstract class Languages {
   String get menuOption4;
   String get menuOption5;
 
+  // specialist pages
+  String get specialistTopic;
+  String get specialistCaption1;
+  String get specialistCaption2;
+  String get specialistCaption3;
+  String get specialistCaption4;
+  String get specialistCaption5;
+
 }
