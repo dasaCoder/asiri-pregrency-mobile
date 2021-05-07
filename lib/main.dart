@@ -47,6 +47,7 @@ class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: true,
       locale: _locale,
       home: SafeArea(
         child: Scaffold(
@@ -69,7 +70,7 @@ class _MyHomePageState extends State<HomePage> {
 
         return Theme(
           data: ThemeData(
-              fontFamily: lang == 'en'? 'FM_Malit' : 'RocknRollOne'
+              fontFamily: lang == 'en'? 'RocknRollOne' : 'FM_Malit'
           ),
           child: SafeArea(child: navigator),
         );

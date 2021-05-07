@@ -13,109 +13,107 @@ class MonthsFactsHome extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         // floatingActionButton: SvgPicture.asset("assets/images/factPage/2month.svg"),
-        body: SingleChildScrollView(
-          child: Container(
-            decoration: new BoxDecoration(
-                gradient: new RadialGradient(colors: [
-              Colors.white,
-              Color.fromRGBO(254, 223, 202, 1),
-            ])),
-            padding: EdgeInsets.only(top: 10, left: 30, right: 40),
-            child: Center(
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 20,
-                      bottom: 15,
-                    ),
-                    child: Text(
-                      Languages.of(context).monthFactsTitle,
-                      style: new TextStyle(
-                          fontSize: 23.0, color: Color(0xFF571338)),
-                    ),
+        body: Container(
+          decoration: new BoxDecoration(
+              gradient: new RadialGradient(colors: [
+            Colors.white,
+            Color.fromRGBO(254, 223, 202, 1),
+          ])),
+          padding: EdgeInsets.only(top: 10, left: 30, right: 40),
+          child: Center(
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(
+                    top: 20,
+                    bottom: 15,
                   ),
-                  Container(
-                    height: 200,
-                    child: Image.asset(
-                        "assets/images/factPage/woman_standing.png"),
+                  child: Text(
+                    Languages.of(context).monthFactsTitle,
+                    style: new TextStyle(
+                        fontSize: 23.0, color: Color(0xFF571338)),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MonthFactIcon(
-                          month: Languages.of(context).first,
-                          iconPath: 'first',
-                        ),
-                        MonthFactIcon(
-                          month: Languages.of(context).second,
-                          iconPath: '2month',
-                        ),
-                        MonthFactIcon(
-                          month: Languages.of(context).third,
-                          iconPath: '3month',
-                        ),
-                      ],
-                    ),
+                ),
+                Container(
+                  height: 200,
+                  child: Image.asset(
+                      "assets/images/factPage/woman_standing.png"),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MonthFactIcon(
+                        month: Languages.of(context).first,
+                        iconPath: 'first',
+                      ),
+                      MonthFactIcon(
+                        month: Languages.of(context).second,
+                        iconPath: '2month',
+                      ),
+                      MonthFactIcon(
+                        month: Languages.of(context).third,
+                        iconPath: '3month',
+                      ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MonthFactIcon(
-                          month: Languages.of(context).fourth,
-                          iconPath: '4month',
-                        ),
-                        MonthFactIcon(
-                          month: Languages.of(context).fifth,
-                          iconPath: '5month',
-                        ),
-                        MonthFactIcon(
-                          month: Languages.of(context).sixth,
-                          iconPath: '6month',
-                        ),
-                      ],
-                    ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MonthFactIcon(
+                        month: Languages.of(context).fourth,
+                        iconPath: '4month',
+                      ),
+                      MonthFactIcon(
+                        month: Languages.of(context).fifth,
+                        iconPath: '5month',
+                      ),
+                      MonthFactIcon(
+                        month: Languages.of(context).sixth,
+                        iconPath: '6month',
+                      ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MonthFactIcon(
-                          month: Languages.of(context).seventh,
-                          iconPath: '7month',
-                        ),
-                        MonthFactIcon(
-                          month: Languages.of(context).eighth,
-                          iconPath: '8month',
-                        ),
-                        MonthFactIcon(
-                          month: Languages.of(context).nine,
-                          iconPath: '9month',
-                        ),
-                      ],
-                    ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MonthFactIcon(
+                        month: Languages.of(context).seventh,
+                        iconPath: '7month',
+                      ),
+                      MonthFactIcon(
+                        month: Languages.of(context).eighth,
+                        iconPath: '8month',
+                      ),
+                      MonthFactIcon(
+                        month: Languages.of(context).nine,
+                        iconPath: '9month',
+                      ),
+                    ],
                   ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 20),
-                          child: Image.asset(
-                              "assets/images/factPage/2month.png"),
-                          height: 50,
-                          width: 50,
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 20),
+                        child: Image.asset(
+                            "assets/images/factPage/2month.png"),
+                        height: 50,
+                        width: 50,
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),

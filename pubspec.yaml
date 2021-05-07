@@ -55,6 +55,7 @@ flutter:
     - assets/images/factPage/
     - assets/images/menu/
     - assets/images/lan/sin/
+    - assets/images/drawer/
     - assets/fonts/
 
   fonts:
