@@ -5,61 +5,94 @@ import 'package:mother_and_baby/screens/infoMenu.dart';
 import 'package:mother_and_baby/screens/monthsFactHome.dart';
 import 'package:mother_and_baby/widgets/drawerItem.dart';
 
-class NavDrawer extends StatelessWidget {
+class NavDrawer extends StatefulWidget {
+  @override
+  _NavDrawerState createState() => _NavDrawerState();
+}
+
+class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     return drawer(context);
   }
 
-  Container drawer(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.8,
-      decoration: new BoxDecoration(color: Color.fromRGBO(242,236,255,1)),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(right: 15),
-                    width: 30,
-                    child: Image.asset(
-                      "assets/images/drawer/burger.png",
-                      height: 15,
+  bool selected = false;
+
+  toggleRemindersOptions() {
+    setState(() {
+      selected = !selected;
+    });
+  }
+
+  SingleChildScrollView drawer(BuildContext context) {
+    return SingleChildScrollView(
+      child: Container(
+        constraints: new BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+        width: MediaQuery.of(context).size.width * 0.8,
+        decoration: new BoxDecoration(color: Color.fromRGBO(242,236,255,1)),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(right: 15),
+                      width: 30,
+                      child: Image.asset(
+                        "assets/images/drawer/burger.png",
+                        height: 15,
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  "Menu",
-                  style: new TextStyle(
-                    fontSize: 20,
-                    color: Color.fromRGBO(161,129,239,1)
+                  Text(
+                    "Menu",
+                    style: new TextStyle(
+                      fontSize: 20,
+                      color: Color.fromRGBO(161,129,239,1)
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            child: Image.asset(
-              "assets/images/drawer/avatar.png",
-              height: 150,
-              width: 150,
+            Container(
+              child: Image.asset(
+                "assets/images/drawer/avatar.png",
+                height: 150,
+                width: 150,
+              ),
             ),
-          ),
-          DrawerListItem(title: "Diary", imagePath: "diary.png",),
-          DrawerListItem(title: "Reminders", imagePath: "bell.png",),
-          DrawerListItem(title: "Community", imagePath: "community.png",),
-          DrawerListItem(title: "Meet your consultant", imagePath: "consultant.png",),
-          DrawerListItem(title: "Meet your midwife", imagePath: "nurse.png",),
-          DrawerListItem(title: "Pregnancy Exercise", imagePath: "exercise.png",),
-          DrawerListItem(title: "Hospital services", imagePath: "hospital.png",),
-        ],
+            DrawerListItem(title: "Diary", imagePath: "diary.png",),
+            ExpansionTile(leading:DrawerListItem(title: "Community", imagePath: "community.png",)
+                , children: [ DrawerListItem(title: "Community", imagePath: "community.png",),
+              ],),
+            DrawerListItem(title: "Reminders", imagePath: "bell.png", onClicked: toggleRemindersOptions,),
+            AnimatedContainer(
+              height: selected ? 150.0 : 0.0,
+              color: selected ? Color.fromRGBO(231,219,255,1) : Color.fromRGBO(242,236,255,1),
+              alignment: AlignmentDirectional.topCenter,
+              duration: const Duration(seconds: 2),
+              curve: Curves.fastOutSlowIn,
+              margin: EdgeInsets.only(left: 30.0, right: 20),
+              child: Container(
+                child: Column(children: [
+                  DrawerListItem(title: "Community", imagePath: "community.png",),
+                  DrawerListItem(title: "Community", imagePath: "community.png",),
+                ],),
+              ),
+            ),
+            DrawerListItem(title: "Community", imagePath: "community.png",),
+            DrawerListItem(title: "Meet your consultant", imagePath: "consultant.png",),
+            DrawerListItem(title: "Meet your midwife", imagePath: "nurse.png",),
+            DrawerListItem(title: "Pregnancy Exercise", imagePath: "exercise.png",),
+            DrawerListItem(title: "Hospital services", imagePath: "hospital.png",),
+          ],
+        ),
       ),
     );
   }
