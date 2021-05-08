@@ -37,4 +37,17 @@ abstract class Languages {
   String get specialistCaption4;
   String get specialistCaption5;
 
+  // drwer
+  String get title;
+  String get diary;
+  String get reminders;
+  String get community;
+  String get consultant;
+  String get midwife;
+  String get exercise;
+  String get hospital;
+  String get medicineReminder;
+  String get appoinmentsReminder;
+  String get vaccineReminder;
+
 }

@@ -31,4 +31,16 @@ class LanguageSi extends Languages {
   String get specialistCaption3 => ".¾NŒ ndjh;a iu. we;sjk Èhjeähd ;;a;ajh";
   String get specialistCaption4 => "uõ moúh ,eîug n,dfmdfrd;a;= jk Tng Wmfoia";
   String get specialistCaption5 => "isfiaßhka ie;alu ms<snoj";
+
+  String get title => "Menu";
+  String get diary => "Diary";
+  String get reminders => "Reminders";
+  String get community => "Community";
+  String get consultant => "Meet your consultant";
+  String get midwife => "Meet your midwife";
+  String get exercise => "Pregnancy Exercise";
+  String get hospital => "Hospital services";
+  String get medicineReminder => "Medicine / Vitamins";
+  String get appoinmentsReminder => "Doctor appointments";
+  String get vaccineReminder => "Vaccines";
 }

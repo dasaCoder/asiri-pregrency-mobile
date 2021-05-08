@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/main.dart';
 import 'package:mother_and_baby/screens/infoMenu.dart';
 import 'package:mother_and_baby/screens/monthsFactHome.dart';
@@ -28,7 +29,7 @@ class _NavDrawerState extends State<NavDrawer> {
     return SingleChildScrollView(
       child: Container(
         constraints: new BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-        width: MediaQuery.of(context).size.width * 0.8,
+        width: MediaQuery.of(context).size.width * 0.9,
         decoration: new BoxDecoration(color: Color.fromRGBO(242,236,255,1)),
         child: Column(
           children: [
@@ -67,30 +68,31 @@ class _NavDrawerState extends State<NavDrawer> {
                 width: 150,
               ),
             ),
-            DrawerListItem(title: "Diary", imagePath: "diary.png",),
-            ExpansionTile(leading:DrawerListItem(title: "Community", imagePath: "community.png",)
-                , children: [ DrawerListItem(title: "Community", imagePath: "community.png",),
-              ],),
-            DrawerListItem(title: "Reminders", imagePath: "bell.png", onClicked: toggleRemindersOptions,),
+            DrawerListItem(title: Languages.of(context).diary, imagePath: "diary.png",),
+            DrawerListItem(title: Languages.of(context).reminders, imagePath: "bell.png", onClicked: toggleRemindersOptions,),
             AnimatedContainer(
               height: selected ? 150.0 : 0.0,
               color: selected ? Color.fromRGBO(231,219,255,1) : Color.fromRGBO(242,236,255,1),
               alignment: AlignmentDirectional.topCenter,
-              duration: const Duration(seconds: 2),
+              duration: const Duration(seconds: 1),
               curve: Curves.fastOutSlowIn,
-              margin: EdgeInsets.only(left: 30.0, right: 20),
-              child: Container(
-                child: Column(children: [
-                  DrawerListItem(title: "Community", imagePath: "community.png",),
-                  DrawerListItem(title: "Community", imagePath: "community.png",),
-                ],),
+              margin: EdgeInsets.only(left: 30.0, right: 20, top: 10),
+              child: ListView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  Column(children: [
+                    DrawerListItem(title: Languages.of(context).medicineReminder, imagePath: "pills.png",),
+                    DrawerListItem(title: Languages.of(context).appoinmentsReminder, imagePath: "tie.png",),
+                    DrawerListItem(title: Languages.of(context).vaccineReminder, imagePath: "vaccine.png",),
+                  ],),
+                ],
               ),
             ),
-            DrawerListItem(title: "Community", imagePath: "community.png",),
-            DrawerListItem(title: "Meet your consultant", imagePath: "consultant.png",),
-            DrawerListItem(title: "Meet your midwife", imagePath: "nurse.png",),
-            DrawerListItem(title: "Pregnancy Exercise", imagePath: "exercise.png",),
-            DrawerListItem(title: "Hospital services", imagePath: "hospital.png",),
+            DrawerListItem(title: Languages.of(context).community, imagePath: "community.png",),
+            DrawerListItem(title: Languages.of(context).consultant, imagePath: "consultant.png",),
+            DrawerListItem(title: Languages.of(context).midwife, imagePath: "nurse.png",),
+            DrawerListItem(title: Languages.of(context).exercise, imagePath: "exercise.png",),
+            DrawerListItem(title: Languages.of(context).hospital, imagePath: "hospital.png",),
           ],
         ),
       ),

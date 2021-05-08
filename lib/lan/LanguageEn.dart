@@ -32,4 +32,16 @@ class LanguageEn extends Languages {
   String get specialistCaption3 => "";
   String get specialistCaption4 => "";
   String get specialistCaption5 => "";
+
+  String get title => "Menu";
+  String get diary => "Diary";
+  String get reminders => "Reminders";
+  String get community => "Community";
+  String get consultant => "Meet your consultant";
+  String get midwife => "Meet your midwife";
+  String get exercise => "Pregnancy Exercise";
+  String get hospital => "Hospital services";
+  String get medicineReminder => "Medicine / Vitamins";
+  String get appoinmentsReminder => "Doctor appointments";
+  String get vaccineReminder => "Vaccines";
 }
