@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mother_and_baby/KickCounter.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
+import 'package:mother_and_baby/screens/diary.dart';
+import 'package:mother_and_baby/screens/specialistPage.dart';
 import 'package:mother_and_baby/widgets/NavDrawer.dart';
 
 import 'locale_constants.dart';
 import 'localization_deligate.dart';
 
 void main() {
-  runApp(HomePage(title: "test title",));
+  runApp(HomePage(
+    title: "test title",
+  ));
 }
 
 class HomePage extends StatefulWidget {
@@ -44,6 +48,27 @@ class _MyHomePageState extends State<HomePage> {
     super.didChangeDependencies();
   }
 
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static final List<Widget> _widgetOptions = <Widget>[
+    DiaryScreen(),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,27 +76,43 @@ class _MyHomePageState extends State<HomePage> {
       locale: _locale,
       home: SafeArea(
         child: Scaffold(
-          appBar: AppBar(title: Text("title"),),
           drawer: NavDrawer(),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Languages.of(context).appName",
-                ),
-              ],
+          body: Builder(
+            builder: (context) => Container(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      InkWell(
+                        onTap: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(right: 15),
+                          width: 30,
+                          child: Image.asset(
+                            "assets/images/drawer/burger.png",
+                            height: 15,
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                  Container(child: _widgetOptions.elementAt(_selectedIndex)),
+                ],
+              ),
             ),
           ),
+          wit
         ),
       ),
       builder: (context, navigator) {
         var lang = Localizations.localeOf(context).languageCode;
 
         return Theme(
-          data: ThemeData(
-              fontFamily: lang == 'en'? 'RocknRollOne' : 'FM_Malit'
-          ),
+          data:
+              ThemeData(fontFamily: lang == 'en' ? 'RocknRollOne' : 'FM_Malit'),
           child: SafeArea(child: navigator),
         );
       },

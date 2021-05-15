@@ -50,4 +50,9 @@ abstract class Languages {
   String get appoinmentsReminder;
   String get vaccineReminder;
 
+  // diary
+  String get DiaryAddNote;
+  String get DiaryMedicine;
+  String get DiaryLifeStyle;
+
 }
