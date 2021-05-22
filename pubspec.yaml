@@ -64,6 +64,7 @@ flutter:
     - assets/images/diary/
     - assets/images/welcome/
     - assets/images/login/
+    - assets/images/bottomDrawer/
     - assets/fonts/
 
   fonts:

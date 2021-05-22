@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mother_and_baby/screens/Login.dart';
-import 'package:mother_and_baby/screens/diary.dart';
+import 'package:mother_and_baby/screens/home.dart';
 import 'package:mother_and_baby/services/auth.service.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // TODO - show snack bar
 
       Navigator.of(context).push(
-          MaterialPageRoute(builder: (BuildContext context) => DiaryScreen()));
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
     });
   }
 

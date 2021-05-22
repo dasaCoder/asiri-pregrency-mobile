@@ -10,9 +10,8 @@ class DiaryScreen extends StatefulWidget {
 class _DiaryScreenState extends State<DiaryScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: NavDrawer(),
-      body: Builder(
+    return Container(
+      child: Builder(
         builder: (BuildContext context) => SingleChildScrollView(
           child: Container(
             child: Column(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mother_and_baby/screens/diary.dart';
+import 'package:mother_and_baby/screens/home.dart';
 import 'package:mother_and_baby/screens/register.dart';
 import 'package:mother_and_baby/services/auth.service.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
       print(result);
       if (result) {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => DiaryScreen()));
+            builder: (BuildContext context) => HomeScreen()));
       } else {
         print("error is there " + result.toString());
       }
@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
         .signInWithGoogle()
         .then((result) {
       Navigator.of(context).push(
-          MaterialPageRoute(builder: (BuildContext context) => DiaryScreen()));
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
     });
   }
 
