@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "616361179202",
+    "firebase_url": "https://asiri-hospital-tour.firebaseio.com",
+    "project_id": "asiri-hospital-tour",
+    "storage_bucket": "asiri-hospital-tour.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616361179202:android:cefb1153a1feb3e54355db",
+        "android_client_info": {
+          "package_name": "com.burbs.motherbaby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616361179202-beidujv5kbp7hnfmlev0sjddm4ojrflr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.burbs.motherbaby",
+            "certificate_hash": "0226e70c400731a503e6552b4051025c74222e1c"
+          }
+        },
+        {
+          "client_id": "616361179202-pp98d0l630dhh432mfv670ks0pl97dse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATf_7dw8zZS1R8_gNqNgPOA5OafAqkvlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616361179202-pp98d0l630dhh432mfv670ks0pl97dse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

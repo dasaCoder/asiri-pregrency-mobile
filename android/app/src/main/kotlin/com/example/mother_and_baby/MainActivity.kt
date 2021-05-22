@@ -1,4 +1,4 @@
-package com.example.mother_and_baby
+package com.burbs.motherbaby
 
 import io.flutter.embedding.android.FlutterActivity
 
