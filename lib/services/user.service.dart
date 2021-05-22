@@ -8,10 +8,9 @@ class UserService{
 
   UserService(this._firestoreInstance);
 
-  void saveUser({userDetails: AsiriUser}) {
-    _firestoreInstance.collection("mobile_app_users")
-        .add(userDetails.toJson())
-        .then((value) => print("details added"));
+  Future<DocumentReference> saveUser({userDetails: AsiriUser}) {
+    return _firestoreInstance.collection("mobile_app_users")
+        .add(userDetails.toJson());
   }
 }
 

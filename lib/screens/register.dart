@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mother_and_baby/screens/Login.dart';
+import 'package:mother_and_baby/screens/diary.dart';
 import 'package:mother_and_baby/services/auth.service.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var telephoneController = TextEditingController();
   var passwordController = TextEditingController();
   var rePasswordController = TextEditingController();
-
+  String uuid;
   AsiriUser userDetails;
 
   void loginWithSocial(BuildContext context) {
@@ -29,14 +30,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
         isSocialSignUp = true;
       });
 
-      userDetails = AsiriUser(credentials.user.uid, credentials.user.displayName,
-          credentials.user.email, telephoneController.text, "");
-    }) ;
+      nameController.text = credentials.user.displayName;
+      emailController.text = credentials.user.email;
+      uuid = credentials.user.uid;
+    });
   }
 
   void socialRegister(BuildContext context) {
+    validateBasicUserDetails();
+    userDetails = AsiriUser(uuid, nameController.text, emailController.text,
+        telephoneController.text, "");
     Provider.of<UserService>(context, listen: false)
-        .saveUser(userDetails: userDetails);
+        .saveUser(userDetails: userDetails)
+        .then((doc) {
+      // TODO - show snack bar
+
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (BuildContext context) => DiaryScreen()));
+    });
+  }
+
+  void validateBasicUserDetails() {
+    if (uuid.isEmpty) {
+      // some issue happend in authentication
+    }
+    if (nameController.text.isEmpty) {}
+    if (emailController.text.isEmpty) {}
+    // TODO - validate telephone no and email format
   }
 
   @override
@@ -294,11 +314,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               borderRadius: new BorderRadius.circular(30.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            if (isSocialSignUp) {
+                              socialRegister(context);
+                            } else {}
+                          },
                           child: Container(
                             padding: EdgeInsets.all(10),
                             child: Text(
-                              "SIGN UP",
+                              isSocialSignUp ? "Next" : "SIGN UP",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Raleway',
