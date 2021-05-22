@@ -18,6 +18,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var passwordController = TextEditingController();
   var rePasswordController = TextEditingController();
 
+  AsiriUser userDetails;
+
   void loginWithSocial(BuildContext context) {
     Provider.of<AuthenticationService>(context, listen: false)
         .signInWithGoogle()
@@ -27,11 +29,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         isSocialSignUp = true;
       });
 
-      var userDetails = AsiriUser(credentials.user.uid, credentials.user.displayName,
+      userDetails = AsiriUser(credentials.user.uid, credentials.user.displayName,
           credentials.user.email, telephoneController.text, "");
-      Provider.of<UserService>(context, listen: false)
-          .saveUser(userDetails: userDetails);
     }) ;
+  }
+
+  void socialRegister(BuildContext context) {
+    Provider.of<UserService>(context, listen: false)
+        .saveUser(userDetails: userDetails);
   }
 
   @override
