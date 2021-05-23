@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/widgets/NavDrawer.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class DiaryScreen extends StatefulWidget {
   @override
@@ -8,6 +9,12 @@ class DiaryScreen extends StatefulWidget {
 }
 
 class _DiaryScreenState extends State<DiaryScreen> {
+  CalendarFormat _calendarFormat = CalendarFormat.week;
+  DateTime _focusedDay = DateTime.now();
+  DateTime _selectedDay = DateTime.now();
+  DateTime firstDay = DateTime.parse("2021-01-01");
+  DateTime lastDay = DateTime.parse("2025-01-01");
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +30,9 @@ class _DiaryScreenState extends State<DiaryScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       InkWell(
-                        onTap: () {Scaffold.of(context).openDrawer();},
+                        onTap: () {
+                          Scaffold.of(context).openDrawer();
+                        },
                         child: Container(
                           margin: EdgeInsets.only(right: 15),
                           width: 30,
@@ -36,6 +45,47 @@ class _DiaryScreenState extends State<DiaryScreen> {
                     ],
                   ),
                 ),
+
+                /**
+                 * Calender
+                 */
+                TableCalendar(
+                  focusedDay: _focusedDay,
+                  firstDay: firstDay,
+                  lastDay: lastDay,
+                  calendarFormat: _calendarFormat,
+                  selectedDayPredicate: (day) {
+                    // Use `selectedDayPredicate` to determine which day is currently selected.
+                    // If this returns true, then `day` will be marked as selected.
+
+                    // Using `isSameDay` is recommended to disregard
+                    // the time-part of compared DateTime objects.
+                    return isSameDay(_selectedDay, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDay) {
+                    if (!isSameDay(_selectedDay, selectedDay)) {
+                      // Call `setState()` when updating the selected day
+                      setState(() {
+                        _selectedDay = selectedDay;
+                        _focusedDay = focusedDay;
+                      });
+                    }
+                  },
+                  onFormatChanged: (format) {
+                    if (_calendarFormat != format) {
+                      // Call `setState()` when updating calendar format
+                      setState(() {
+                        _calendarFormat = format;
+                      });
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                /**
+                 * End calender
+                 */
                 Container(
                   decoration: new BoxDecoration(
                       color: Color.fromRGBO(199, 233, 251, 1),
@@ -59,10 +109,46 @@ class _DiaryScreenState extends State<DiaryScreen> {
                           builder: (BuildContext context) {
                             return AlertDialog(
                               content: Stack(
-                                children: [
-                                  Container(
-                                    child: Text("Hi"),
-                                  )
+                              children: <Widget>[
+                              Positioned(
+                              right: -40.0,
+                                top: -40.0,
+                                child: InkResponse(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: CircleAvatar(
+                                    child: Icon(Icons.close),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                ),
+                              ),
+                              Form(
+                                // key: _formKey,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: TextFormField(),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: TextFormField(),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: RaisedButton(
+                                        child: Text("Submitß"),
+                                        onPressed: () {
+                                          // if (_formKey.currentState.validate()) {
+                                          //   _formKey.currentState.save();
+                                          // }
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),)
                                 ],
                               ),
                             );
