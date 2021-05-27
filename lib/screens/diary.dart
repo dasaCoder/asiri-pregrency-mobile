@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/widgets/NavDrawer.dart';
+import 'package:mother_and_baby/widgets/addNoteDialog.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DiaryScreen extends StatefulWidget {
@@ -107,51 +111,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return AlertDialog(
-                              content: Stack(
-                              children: <Widget>[
-                              Positioned(
-                              right: -40.0,
-                                top: -40.0,
-                                child: InkResponse(
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: CircleAvatar(
-                                    child: Icon(Icons.close),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                ),
-                              ),
-                              Form(
-                                // key: _formKey,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: TextFormField(),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: TextFormField(),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: RaisedButton(
-                                        child: Text("Submitß"),
-                                        onPressed: () {
-                                          // if (_formKey.currentState.validate()) {
-                                          //   _formKey.currentState.save();
-                                          // }
-                                        },
-                                      ),
-                                    )
-                                  ],
-                                ),)
-                                ],
-                              ),
-                            );
+                            return AddNoteAlertDialog();
                           })
                     },
                   ),
