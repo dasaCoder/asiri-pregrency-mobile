@@ -4,7 +4,7 @@ import 'package:mother_and_baby/services/user.service.dart';
 import 'package:provider/provider.dart';
 
 class AddWeightDialog extends StatefulWidget {
-  final selectedDate;
+  final String selectedDate;
 
   const AddWeightDialog({Key key, this.selectedDate}) : super(key: key);
 

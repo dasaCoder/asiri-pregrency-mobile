@@ -8,6 +8,7 @@ import 'package:mother_and_baby/widgets/diary/addNoteDialog.dart';
 import 'package:mother_and_baby/widgets/diary/addTemperatureDialog.dart';
 import 'package:mother_and_baby/widgets/diary/addWaterIntake.dart';
 import 'package:mother_and_baby/widgets/diary/addWeightDialog.dart';
+import 'package:mother_and_baby/widgets/diary/symptoms.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -27,6 +28,11 @@ class _DiaryScreenState extends State<DiaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          image: DecorationImage(
+              image: AssetImage("assets/images/diary/bg.png"),
+              fit: BoxFit.cover)),
       child: Builder(
         builder: (BuildContext context) => SingleChildScrollView(
           child: Container(
@@ -246,7 +252,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       ),
                     ],
                   ),
-                )
+                ),
+                SymptomsWidget(),
               ],
             ),
           ),

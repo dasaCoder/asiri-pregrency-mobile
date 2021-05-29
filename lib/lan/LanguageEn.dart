@@ -56,4 +56,5 @@ class LanguageEn extends Languages {
   String get addNoteTitle => "Add Note";
   String get titleTxt => "Title";
   String get descriptionTxt => "Description";
+  String get symptomsTxt => "Symptoms";
 }

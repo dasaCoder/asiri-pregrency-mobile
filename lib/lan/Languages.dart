@@ -62,4 +62,5 @@ abstract class Languages {
   String get addNoteTitle;
   String get titleTxt;
   String get descriptionTxt;
+  String get symptomsTxt;
 }
