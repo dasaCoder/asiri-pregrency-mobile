@@ -41,6 +41,7 @@ dependencies:
   table_calendar: ^3.0.0
   file_picker: ^3.0.2+2
   firebase_storage: ^8.1.0
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:
