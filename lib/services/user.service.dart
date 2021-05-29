@@ -12,6 +12,11 @@ class UserService{
     return _firestoreInstance.collection("mobile_app_users")
         .add(userDetails.toJson());
   }
+
+  Future<DocumentReference> saveNote(Note note) {
+    return _firestoreInstance.collection("user_notes")
+        .add(note.toJson());
+  }
 }
 
 class AsiriUser{
@@ -29,5 +34,21 @@ class AsiriUser{
     'userId': userId,
     'telephone': telephone,
     'address': address
+  };
+}
+
+class Note {
+  final String title;
+  final String description;
+  final DateTime date;
+  final List<String> imageUrls;
+
+  Note(this.title, this.description, this.date, this.imageUrls);
+
+  Map<String, dynamic> toJson() => {
+    'title' : title,
+    'description': description,
+    'date': date.toString(),
+    'imageUrls': imageUrls.toList()
   };
 }

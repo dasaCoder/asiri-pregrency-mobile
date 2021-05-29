@@ -111,7 +111,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return AddNoteAlertDialog();
+                            return AddNoteAlertDialog(selectedDate: _selectedDay,);
                           })
                     },
                   ),
