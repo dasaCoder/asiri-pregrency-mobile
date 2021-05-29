@@ -4,8 +4,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/widgets/NavDrawer.dart';
-import 'package:mother_and_baby/widgets/addNoteDialog.dart';
+import 'package:mother_and_baby/widgets/diary/addNoteDialog.dart';
+import 'package:mother_and_baby/widgets/diary/addTemperatureDialog.dart';
+import 'package:mother_and_baby/widgets/diary/addWeightDialog.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 class DiaryScreen extends StatefulWidget {
   @override
@@ -14,6 +17,7 @@ class DiaryScreen extends StatefulWidget {
 
 class _DiaryScreenState extends State<DiaryScreen> {
   CalendarFormat _calendarFormat = CalendarFormat.week;
+  final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
   DateTime firstDay = DateTime.parse("2021-01-01");
@@ -99,7 +103,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: ListTile(
                     title: Text(
-                      Languages.of(context).DiaryAddNote,
+                      Languages.of(context).diaryAddNote,
                       style: new TextStyle(
                           color: Color.fromRGBO(70, 72, 162, 1), fontSize: 16),
                     ),
@@ -111,7 +115,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return AddNoteAlertDialog(selectedDate: _selectedDay,);
+                            return AddNoteAlertDialog(selectedDate: dateFormatter.format(_selectedDay),);
                           })
                     },
                   ),
@@ -125,7 +129,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: ListTile(
                     title: Text(
-                      Languages.of(context).DiaryMedicine,
+                      Languages.of(context).diaryMedicine,
                       style: new TextStyle(
                           color: Color.fromRGBO(70, 72, 162, 1), fontSize: 16),
                     ),
@@ -133,6 +137,83 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       "assets/images/diary/vitamins.png",
                       height: 40,
                     ),
+                  ),
+                ),
+                Container(
+                  decoration: new BoxDecoration(
+                      color: Color.fromRGBO(199, 233, 251, 1),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  padding:
+                  EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+                  margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: ExpansionTile(
+                    title: Text(
+                      Languages.of(context).diaryLifeStyle,
+                      style: new TextStyle(
+                          color: Color.fromRGBO(70, 72, 162, 1), fontSize: 16),
+                    ),
+                    trailing: Image.asset(
+                      "assets/images/diary/apple.png",
+                      height: 40,
+                    ),
+                    children: [
+                      Container(
+                        decoration: new BoxDecoration(
+                            color: Color.fromRGBO(199, 233, 251, 1),
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        padding:
+                        EdgeInsets.only(left: 20, right: 0, top: 10, bottom: 10),
+                        margin: EdgeInsets.only(left: 10, right: 0, top: 10),
+                        child: ListTile(
+                          title: Text(
+                            Languages.of(context).diaryWeight,
+                            style: new TextStyle(
+                                color: Color.fromRGBO(70, 72, 162, 1), fontSize: 15),
+                          ),
+                          trailing: Image.asset(
+                            "assets/images/diary/weight.png",
+                            height: 40,
+                          ),
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AddWeightDialog(selectedDate: dateFormatter.format(_selectedDay),);
+                                });
+                          },
+                        ),
+                      ),
+
+                      /**
+                       * Temperature
+                       */
+                      Container(
+                        decoration: new BoxDecoration(
+                            color: Color.fromRGBO(199, 233, 251, 1),
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        padding:
+                        EdgeInsets.only(left: 20, right: 8, top: 10, bottom: 10),
+                        margin: EdgeInsets.only(left: 10, right: 0, top: 10),
+                        child: ListTile(
+                          title: Text(
+                            Languages.of(context).diaryTemperature,
+                            style: new TextStyle(
+                                color: Color.fromRGBO(70, 72, 162, 1), fontSize: 15),
+                          ),
+                          trailing: Image.asset(
+                            "assets/images/diary/temperature.png",
+                            height: 40,
+                          ),
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AddTemperatureDialog(selectedDate: dateFormatter.format(_selectedDay),);
+                                });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 )
               ],

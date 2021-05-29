@@ -51,8 +51,15 @@ abstract class Languages {
   String get vaccineReminder;
 
   // diary
-  String get DiaryAddNote;
-  String get DiaryMedicine;
-  String get DiaryLifeStyle;
-
+  String get diaryAddNote;
+  String get diaryMedicine;
+  String get diaryLifeStyle;
+  String get diaryWeight;
+  String get diaryTemperature;
+  String get diaryWaterIntake;
+  String get addWeightTitle;
+  String get weightTxt;
+  String get addNoteTitle;
+  String get titleTxt;
+  String get descriptionTxt;
 }

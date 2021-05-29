@@ -13,9 +13,11 @@ class UserService{
         .add(userDetails.toJson());
   }
 
-  Future<DocumentReference> saveNote(Note note) {
-    return _firestoreInstance.collection("user_notes")
-        .add(note.toJson());
+  /// Function to save diary data
+  /// this includes, notes, weight & temperature etc
+  Future<DocumentReference> saveDiaryData(DiaryData diaryData) {
+    return _firestoreInstance.collection("diary_data")
+        .add(diaryData.toJson());
   }
 }
 
@@ -37,10 +39,22 @@ class AsiriUser{
   };
 }
 
+class DiaryData {
+  final String type;
+  final dynamic data;
+
+  DiaryData(this.type, this.data);
+
+  Map<String, dynamic> toJson() => {
+    'type' : type,
+    'data' : data
+  };
+}
+
 class Note {
   final String title;
   final String description;
-  final DateTime date;
+  final String date;
   final List<String> imageUrls;
 
   Note(this.title, this.description, this.date, this.imageUrls);
@@ -49,6 +63,6 @@ class Note {
     'title' : title,
     'description': description,
     'date': date.toString(),
-    'imageUrls': imageUrls.toList()
+    'imageUrls': imageUrls.toList(),
   };
 }

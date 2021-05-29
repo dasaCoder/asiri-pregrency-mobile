@@ -44,7 +44,15 @@ class LanguageSi extends Languages {
   String get appoinmentsReminder => "Doctor appointments";
   String get vaccineReminder => "Vaccines";
 
-  String get DiaryAddNote => "Add note";
-  String get DiaryMedicine => "Add Medicine/ Vitamins";
-  String get DiaryLifeStyle => "Lifestyle";
+  String get diaryAddNote => "Add note";
+  String get diaryMedicine => "Add Medicine/ Vitamins";
+  String get diaryLifeStyle => "Lifestyle";
+  String get diaryWeight => "Weight";
+  String get diaryTemperature => "Temperature";
+  String get diaryWaterIntake => "Water Intake";
+  String get addWeightTitle => "Add Weight";
+  String get weightTxt => "Weight";
+  String get addNoteTitle => "Add Note";
+  String get titleTxt => "Title";
+  String get descriptionTxt => "Description";
 }

@@ -8,7 +8,7 @@ import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class AddNoteAlertDialog extends StatefulWidget {
-  final DateTime selectedDate;
+  final String selectedDate;
 
   const AddNoteAlertDialog({Key key, @required this.selectedDate})
       : super(key: key);
@@ -21,6 +21,8 @@ class _AddNoteAlertDialogState extends State<AddNoteAlertDialog> {
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
   final _form = GlobalKey<FormState>();
+  final LIFE_EVENT = "LIFE_EVENT";
+
   List<File> _selectedImages = <File>[];
   bool showProgressBar = false;
   openImportFile() async {
@@ -64,8 +66,9 @@ class _AddNoteAlertDialogState extends State<AddNoteAlertDialog> {
     }
     Note note = Note(titleController.text, descriptionController.text,
         widget.selectedDate, downloadUrls);
+    DiaryData diaryData = DiaryData(LIFE_EVENT, note);
     Provider.of<UserService>(context, listen: false)
-        .saveNote(note)
+        .saveDiaryData(diaryData)
         .then((doc) => print(doc));
     setState(() {
       _selectedImages = [];
