@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/screens/diary.dart';
+import 'package:mother_and_baby/screens/reminders.dart';
 import 'package:mother_and_baby/widgets/NavDrawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'Index 2: School',
       style: optionStyle,
     ),
+    ReminderScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -33,10 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromRGBO(161, 129, 239, 1),
+        type:  BottomNavigationBarType.fixed,
+        backgroundColor: Color.fromRGBO(161, 129, 239, 1.0),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage("assets/images/bottomDrawer/diary.png")),
+            icon: Icon(Icons.import_contacts_outlined),
             label: 'Diary',
           ),
           BottomNavigationBarItem(
@@ -45,11 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage("assets/images/bottomDrawer/heart.png")),
-            label: 'Health',
+            label: 'Healths',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications_active_outlined),
+            label: 'Reminders',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color.fromRGBO(120, 102, 221, 1),
+        selectedItemColor: Color.fromRGBO(246, 91, 122, 1.0),
         onTap: _onItemTapped,
       ),
       drawer: NavDrawer(),
