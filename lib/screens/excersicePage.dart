@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/widgets/videoPreview.dart';
 
-class SpecialistPage extends StatelessWidget {
+class ExercisePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +38,7 @@ class SpecialistPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      Languages.of(context).specialistTopic,
+                      Languages.of(context).exerciseTitle,
                       style: new TextStyle(
                           fontSize: 20,
                           color: Color.fromRGBO(161, 129, 239, 1)),
@@ -55,7 +55,7 @@ class SpecialistPage extends StatelessWidget {
                   children: [
                     VideoPreview(
                       iconName: "Dental.jpg",
-                      text: Languages.of(context).specialistCaption1,
+                      text: Languages.of(context).exerciseCaption1,
                       url: "https://firebasestorage.googleapis.com/v0/b/asiri-hospital-tour.appspot.com/o/videos%2F%E0%B7%83%E0%B7%92%E0%B7%83%E0%B7%9A%E0%B6%BB%E0%B7%92%E0%B6%BA%E0%B6%B1%E0%B7%8A%20%E0%B7%83%E0%B7%90%E0%B6%AD%E0%B7%8A%E0%B6%9A%E0%B6%B8.mp4?alt=media&token=a581a8c5-80e3-4391-a4dd-2ea95ae8fefd",
                     ),
 

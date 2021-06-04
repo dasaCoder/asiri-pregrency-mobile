@@ -4,8 +4,8 @@ import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/main.dart';
 import 'package:mother_and_baby/screens/diary.dart';
 import 'package:mother_and_baby/screens/home.dart';
-import 'package:mother_and_baby/screens/infoMenu.dart';
-import 'package:mother_and_baby/screens/monthsFactHome.dart';
+import 'package:mother_and_baby/screens/midWifePage.dart';
+import 'package:mother_and_baby/screens/excersicePage.dart';
 import 'package:mother_and_baby/screens/reminders/reminders.dart';
 import 'package:mother_and_baby/screens/specialistPage.dart';
 import 'package:mother_and_baby/services/user.service.dart';
@@ -70,6 +70,18 @@ class _NavDrawerState extends State<NavDrawer> {
         {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => SpecialistPage()));
+        }
+        break;
+      case "MIDWIFE_PAGE":
+        {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => MidWifePage()));
+        }
+        break;
+      case "EXERCISE_AGE":
+        {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => ExercisePage()));
         }
         break;
       default:
@@ -178,10 +190,12 @@ class _NavDrawerState extends State<NavDrawer> {
               DrawerListItem(
                 title: Languages.of(context).midwife,
                 imagePath: "nurse.png",
+                onClicked: () => navigateToPage(context, "MIDWIFE_PAGE"),
               ),
               DrawerListItem(
                 title: Languages.of(context).exercise,
                 imagePath: "exercise.png",
+                onClicked: () => navigateToPage(context, "EXERCISE_AGE"),
               ),
               DrawerListItem(
                 title: Languages.of(context).hospital,

@@ -32,6 +32,14 @@ class LanguageSi extends Languages {
   String get specialistCaption4 => "uõ moúh ,eîug n,dfmdfrd;a;= jk Tng Wmfoia";
   String get specialistCaption5 => "isfiaßhka ie;alu ms<snoj";
 
+  // mid wife page
+  String get midWifeTitle => "Meet Your Midwife";
+  String get midWifeCaption1 => "How to bath your baby right";
+
+  // exercise page
+  String get exerciseTitle => "Pregnancy Page";
+  String get exerciseCaption1 => "How to take care of";
+
   String get title => "Menu";
   String get diary => "Diary";
   String get reminders => "Reminders";

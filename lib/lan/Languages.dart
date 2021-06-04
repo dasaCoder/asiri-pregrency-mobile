@@ -37,6 +37,14 @@ abstract class Languages {
   String get specialistCaption4;
   String get specialistCaption5;
 
+  // mid wife page
+  String get midWifeTitle;
+  String get midWifeCaption1;
+
+  // exercise page
+  String get exerciseTitle;
+  String get exerciseCaption1;
+
   // drwer
   String get title;
   String get diary;

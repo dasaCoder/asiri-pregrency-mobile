@@ -27,11 +27,19 @@ class LanguageEn extends Languages {
 
   // specialist pages
   String get specialistTopic => "Meet Your Consultant";
-  String get specialistCaption1 => "vid 1";
+  String get specialistCaption1 => "How to protect your mouth hygiene";
   String get specialistCaption2 => "vid 2";
   String get specialistCaption3 => "vid 3";
   String get specialistCaption4 => "vid 4";
   String get specialistCaption5 => "vid 5";
+
+  // mid wife page
+  String get midWifeTitle => "Meet Your Midwife";
+  String get midWifeCaption1 => "How to bath your baby right";
+
+  // exercise page
+  String get exerciseTitle => "Pregnancy Exercise";
+  String get exerciseCaption1 => "How to take care of your";
 
   String get title => "Menu";
   String get diary => "Diary";
