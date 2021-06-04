@@ -26,12 +26,12 @@ class LanguageEn extends Languages {
   String get menuOption5 => "";
 
   // specialist pages
-  String get specialistTopic => "";
-  String get specialistCaption1 => "";
-  String get specialistCaption2 => "";
-  String get specialistCaption3 => "";
-  String get specialistCaption4 => "";
-  String get specialistCaption5 => "";
+  String get specialistTopic => "Meet Your Consultant";
+  String get specialistCaption1 => "vid 1";
+  String get specialistCaption2 => "vid 2";
+  String get specialistCaption3 => "vid 3";
+  String get specialistCaption4 => "vid 4";
+  String get specialistCaption5 => "vid 5";
 
   String get title => "Menu";
   String get diary => "Diary";

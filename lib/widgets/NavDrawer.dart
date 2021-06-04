@@ -7,6 +7,7 @@ import 'package:mother_and_baby/screens/home.dart';
 import 'package:mother_and_baby/screens/infoMenu.dart';
 import 'package:mother_and_baby/screens/monthsFactHome.dart';
 import 'package:mother_and_baby/screens/reminders/reminders.dart';
+import 'package:mother_and_baby/screens/specialistPage.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:mother_and_baby/widgets/drawerItem.dart';
 
@@ -63,6 +64,12 @@ class _NavDrawerState extends State<NavDrawer> {
               builder: (BuildContext context) => ReminderScreen(
                 reminderType: ReminderType.VACCINE,
               )));
+        }
+        break;
+      case "SPECIALIST_PAGE":
+        {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => SpecialistPage()));
         }
         break;
       default:
@@ -166,6 +173,7 @@ class _NavDrawerState extends State<NavDrawer> {
               DrawerListItem(
                 title: Languages.of(context).consultant,
                 imagePath: "consultant.png",
+                onClicked: () => navigateToPage(context, "SPECIALIST_PAGE"),
               ),
               DrawerListItem(
                 title: Languages.of(context).midwife,
