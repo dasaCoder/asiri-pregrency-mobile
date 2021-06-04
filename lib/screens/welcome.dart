@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/screens/Login.dart';
 import 'package:mother_and_baby/screens/diary.dart';
+import 'package:mother_and_baby/screens/home.dart';
 import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -16,13 +17,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     final firebaseUser = Provider.of<User>(context, listen: false);
     var timer = Timer(Duration(seconds: 2), ()=> {
-      if(firebaseUser == null) {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => LoginScreen()))
-      } else {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => DiaryScreen()))
-      }
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()))
+      // if(firebaseUser == null) {
+      //   Navigator.of(context).push(
+      //       MaterialPageRoute(builder: (BuildContext context) => LoginScreen()))
+      // } else {
+      //   Navigator.of(context).push(
+      //       MaterialPageRoute(builder: (BuildContext context) => DiaryScreen()))
+      // }
 
     });
     // timer.cancel();

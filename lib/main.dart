@@ -23,8 +23,7 @@ Future<void> main()  async{
 
   notificationAppLaunchDetails =
   await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-  await initNotifications(flutterLocalNotificationsPlugin);
-  requestIOSPermissions(flutterLocalNotificationsPlugin);
+  await initNotifications();
 
   runApp(HomePage(
     title: "test title",

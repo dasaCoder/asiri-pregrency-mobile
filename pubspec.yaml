@@ -44,6 +44,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   flutter_local_notifications: ^5.0.0+4
   rxdart: ^0.27.1
+  awesome_notifications: ^0.0.6+7
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
     - assets/images/bottomDrawer/
     - assets/images/reminders/
     - assets/fonts/
+    - assets/music/
 
   fonts:
     - family: RocknRollOne
