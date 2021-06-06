@@ -1,14 +1,19 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
+import 'package:mother_and_baby/services/user.service.dart';
 import 'package:mother_and_baby/widgets/NavDrawer.dart';
 import 'package:mother_and_baby/widgets/diary/addNoteDialog.dart';
 import 'package:mother_and_baby/widgets/diary/addTemperatureDialog.dart';
 import 'package:mother_and_baby/widgets/diary/addWaterIntake.dart';
 import 'package:mother_and_baby/widgets/diary/addWeightDialog.dart';
+import 'package:mother_and_baby/widgets/diary/diaryDataWidget.dart';
 import 'package:mother_and_baby/widgets/diary/symptoms.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -98,9 +103,12 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 SizedBox(
                   height: 20,
                 ),
+
                 /**
-                 * End calender
+                 * Diary details for date
                  */
+                DiaryDataWidget(),
+
                 Container(
                   decoration: new BoxDecoration(
                       color: Color.fromRGBO(199, 233, 251, 1),
@@ -122,7 +130,9 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return AddNoteAlertDialog(selectedDate: dateFormatter.format(_selectedDay),);
+                            return AddNoteAlertDialog(
+                              selectedDate: dateFormatter.format(_selectedDay),
+                            );
                           })
                     },
                   ),
@@ -151,7 +161,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       color: Color.fromRGBO(199, 233, 251, 1),
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   padding:
-                  EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+                      EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
                   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: ExpansionTile(
                     title: Text(
@@ -167,15 +177,17 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       Container(
                         decoration: new BoxDecoration(
                             color: Color.fromRGBO(199, 233, 251, 1),
-                            borderRadius: BorderRadius.all(Radius.circular(10))),
-                        padding:
-                        EdgeInsets.only(left: 20, right: 0, top: 10, bottom: 0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        padding: EdgeInsets.only(
+                            left: 20, right: 0, top: 10, bottom: 0),
                         margin: EdgeInsets.only(left: 10, right: 0, top: 10),
                         child: ListTile(
                           title: Text(
                             Languages.of(context).diaryWeight,
                             style: new TextStyle(
-                                color: Color.fromRGBO(70, 72, 162, 1), fontSize: 15),
+                                color: Color.fromRGBO(70, 72, 162, 1),
+                                fontSize: 15),
                           ),
                           trailing: Image.asset(
                             "assets/images/diary/weight.png",
@@ -185,7 +197,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AddWeightDialog(selectedDate: dateFormatter.format(_selectedDay),);
+                                  return AddWeightDialog(
+                                    selectedDate:
+                                        dateFormatter.format(_selectedDay),
+                                  );
                                 });
                           },
                         ),
@@ -197,15 +212,17 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       Container(
                         decoration: new BoxDecoration(
                             color: Color.fromRGBO(199, 233, 251, 1),
-                            borderRadius: BorderRadius.all(Radius.circular(10))),
-                        padding:
-                        EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        padding: EdgeInsets.only(
+                            left: 20, right: 10, top: 10, bottom: 0),
                         margin: EdgeInsets.only(left: 10, right: 0, top: 0),
                         child: ListTile(
                           title: Text(
                             Languages.of(context).diaryTemperature,
                             style: new TextStyle(
-                                color: Color.fromRGBO(70, 72, 162, 1), fontSize: 15),
+                                color: Color.fromRGBO(70, 72, 162, 1),
+                                fontSize: 15),
                           ),
                           trailing: Image.asset(
                             "assets/images/diary/temperature.png",
@@ -215,7 +232,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AddTemperatureDialog(selectedDate: dateFormatter.format(_selectedDay),);
+                                  return AddTemperatureDialog(
+                                    selectedDate:
+                                        dateFormatter.format(_selectedDay),
+                                  );
                                 });
                           },
                         ),
@@ -228,14 +248,15 @@ class _DiaryScreenState extends State<DiaryScreen> {
                         decoration: new BoxDecoration(
                             color: Color.fromRGBO(199, 233, 251, 1),
                             borderRadius: BorderRadius.all(Radius.circular(0))),
-                        padding:
-                        EdgeInsets.only(left: 20, right: 8, top: 10, bottom: 10),
+                        padding: EdgeInsets.only(
+                            left: 20, right: 8, top: 10, bottom: 10),
                         margin: EdgeInsets.only(left: 10, right: 0, top: 0),
                         child: ListTile(
                           title: Text(
                             Languages.of(context).diaryWaterIntake,
                             style: new TextStyle(
-                                color: Color.fromRGBO(70, 72, 162, 1), fontSize: 15),
+                                color: Color.fromRGBO(70, 72, 162, 1),
+                                fontSize: 15),
                           ),
                           trailing: Image.asset(
                             "assets/images/diary/water.png",
@@ -245,7 +266,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AddWaterIntake(selectedDate: dateFormatter.format(_selectedDay),);
+                                  return AddWaterIntake(
+                                    selectedDate:
+                                        dateFormatter.format(_selectedDay),
+                                  );
                                 });
                           },
                         ),
@@ -253,7 +277,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                     ],
                   ),
                 ),
-                SymptomsWidget(),
+                SymptomsWidget(selectedDate: "${_selectedDay.year}-${_selectedDay.year}-${_selectedDay.year}",),
               ],
             ),
           ),
@@ -262,3 +286,4 @@ class _DiaryScreenState extends State<DiaryScreen> {
     );
   }
 }
+

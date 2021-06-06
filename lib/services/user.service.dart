@@ -19,7 +19,17 @@ class UserService {
   /// Function to save diary data
   /// this includes, notes, weight & temperature etc
   Future<DocumentReference> saveDiaryData(DiaryData diaryData) {
+    diaryData.createdAt = DateTime.now().millisecondsSinceEpoch;
+    diaryData.date = diaryData.data['date'];
     return _firestoreInstance.collection("diary_data").add(diaryData.toJson());
+  }
+
+  Stream<QuerySnapshot<dynamic>> getDiaryData() {
+    return _firestoreInstance
+        .collection("diary_data")
+        // .where("section", isEqualTo: "LIFE_STYLE")
+        .orderBy("createdAt")
+        .snapshots();
   }
 
   /// Function to save reminders
@@ -69,10 +79,14 @@ class AsiriUser {
 class DiaryData {
   final String type;
   final dynamic data;
+  String section = "LIFE_STYLE";
+  String date;
+  int createdAt;
 
   DiaryData(this.type, this.data);
 
-  Map<String, dynamic> toJson() => {'type': type, 'data': data};
+  Map<String, dynamic> toJson() =>
+      {'type': type, 'data': data, 'section': section, 'createdAt': createdAt, 'date': date};
 }
 
 class Note {
@@ -116,8 +130,7 @@ class Reminder {
       this.reminderType,
       this.year,
       this.month,
-      this.date
-      );
+      this.date);
 
   Map<String, dynamic> toJson() => {
         'title': title,

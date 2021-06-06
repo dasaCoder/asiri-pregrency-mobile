@@ -45,7 +45,7 @@ class _AddWaterIntakeState extends State<AddWaterIntake> {
             alignment: AlignmentDirectional.topStart,
             child: Container(
               child: Text(
-                Languages.of(context).addWeightTitle,
+                Languages.of(context).diaryWaterIntake,
                 style: TextStyle(
                   fontSize: 20,
                   color: Color.fromRGBO(60, 180, 242, 1),

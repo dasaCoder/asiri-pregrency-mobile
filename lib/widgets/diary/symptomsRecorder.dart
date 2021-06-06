@@ -37,6 +37,7 @@ class _SymptomsRecorderState extends State<SymptomsRecorder> {
       "symptomCount": _symptomCount,
       "symptom": widget.title
     });
+    diaryData.section = "SYMPTOMS";
     Provider.of<UserService>(context, listen: false)
         .saveDiaryData(diaryData)
         .then((doc) => print(doc));

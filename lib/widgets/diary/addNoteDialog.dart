@@ -66,10 +66,10 @@ class _AddNoteAlertDialogState extends State<AddNoteAlertDialog> {
     }
     Note note = Note(titleController.text, descriptionController.text,
         widget.selectedDate, downloadUrls);
-    DiaryData diaryData = DiaryData(LIFE_EVENT, note);
+    DiaryData diaryData = DiaryData(LIFE_EVENT, note.toJson());
+    diaryData.section = "NOTE";
     Provider.of<UserService>(context, listen: false)
-        .saveDiaryData(diaryData)
-        .then((doc) => print(doc));
+        .saveDiaryData(diaryData);
     setState(() {
       _selectedImages = [];
     });
