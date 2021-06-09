@@ -42,16 +42,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     validateBasicUserDetails();
     userDetails = AsiriUser(uuid, nameController.text, emailController.text,
         telephoneController.text, "");
-    // Provider.of<UserService>(context, listen: false)
-    //     .saveUser(userDetails: userDetails)
-    //     .then((doc) {
-    //   // TODO - show snack bar
-    //
-    //   Navigator.of(context).push(
-    //       MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
-    // });
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => PregnantDateScreen()));
+    Provider.of<UserService>(context, listen: false)
+        .saveUser(userDetails: userDetails)
+        .then((doc) {
+      // TODO - show snack bar
+
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (BuildContext context) => PregnantDateScreen()));
+    });
+
+    // Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(builder: (BuildContext context) => PregnantDateScreen()));
   }
 
   void validateBasicUserDetails() {

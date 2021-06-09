@@ -8,18 +8,28 @@ import 'package:mother_and_baby/screens/reminders/addReminders.dart';
 
 class UserService {
   final FirebaseFirestore _firestoreInstance;
+  final DBNAME = "mobile_app_users";
 
   UserService(this._firestoreInstance);
 
   Future<DocumentReference> saveUser({userDetails: AsiriUser}) {
     return _firestoreInstance
-        .collection("mobile_app_users")
+        .collection(DBNAME)
         .add(userDetails.toJson());
   }
 
+  Future<void> incrementKickCount(String uuid) {
+    return _firestoreInstance.collection(DBNAME).where("userId", isEqualTo: uuid).limit(1).get().then((snapshot){
+      _firestoreInstance.collection(DBNAME).doc(snapshot.docs.first.id).set({
+        "kickCount" : FieldValue.increment(1)
+      }, SetOptions(merge: true));
+    });
+  }
+
   Future<AsiriUser> getUser(String uuid) async {
+    // ignore: non_constant_identifier_names
     QuerySnapshot<Map<String, dynamic>> snapshot = await _firestoreInstance
-        .collection("mobile_app_users")
+        .collection(DBNAME)
         .where("userId", isEqualTo: uuid)
         .limit(1)
         .get();

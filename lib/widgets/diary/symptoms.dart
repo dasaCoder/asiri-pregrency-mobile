@@ -39,10 +39,6 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
               Languages.of(context).symptomsTxt,
               style: new TextStyle(color: Colors.white, fontSize: 16),
             ),
-            trailing: Image.asset(
-              "assets/images/diary/stress.png",
-              height: 45,
-            ),
             children: [
               /**
                * First row

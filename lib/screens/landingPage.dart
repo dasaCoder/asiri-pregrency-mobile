@@ -5,16 +5,22 @@ import 'package:mother_and_baby/screens/kickCounter.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:mother_and_baby/widgets/videoPreview.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   final AsiriUser asiriUser;
   final int currentMonth;
   const LandingPage({Key key, this.asiriUser, this.currentMonth})
       : super(key: key);
 
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
   String getMonthCaption() {
     String caption = "first";
-    switch (currentMonth) {
+    switch (widget.currentMonth) {
       case 2:
         caption = "second";
         break;
@@ -42,7 +48,15 @@ class LandingPage extends StatelessWidget {
     }
     return caption;
   }
-
+  AsiriUser updatableAsiriUser;
+  @override
+  void initState() {
+    Provider.of<UserService>(context, listen: false).getUser(widget.asiriUser.userId).then((userData) {
+      setState(() {
+        updatableAsiriUser = userData;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -86,14 +100,18 @@ class LandingPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            "Congratulations!",
-                            style: new TextStyle(
-                                fontSize: 18, color: Colors.white),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                "Congratulations!",
+                                style: new TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
@@ -110,7 +128,7 @@ class LandingPage extends StatelessWidget {
                   height: 25,
                 ),
                 Text(
-                  "Your due date is ${DateFormat("MMMM d, yyyy").format(DateTime.fromMillisecondsSinceEpoch(asiriUser.dueDate))}",
+                  "Your due date is ${DateFormat("MMMM d, yyyy").format(DateTime.fromMillisecondsSinceEpoch(widget.asiriUser.dueDate))}",
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ],
@@ -125,12 +143,12 @@ class LandingPage extends StatelessWidget {
                 "assets/images/welcome/baby.png",
                 height: 50,
               ),
-              title: Text("52 kicks ❤"),
+              title: Text("${updatableAsiriUser != null ? updatableAsiriUser.kickCount : "0"} kicks ❤"),
               subtitle: Text("Go to kick counter.."),
               trailing: Icon(Icons.arrow_forward_ios_sharp),
               onTap: () => {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => KickCounter()))
+                    builder: (BuildContext context) => KickCounter(asiriUser: widget.asiriUser,)))
               },
             ),
           ),
@@ -138,7 +156,7 @@ class LandingPage extends StatelessWidget {
           Container(
             child: ListTile(
               leading: Image.asset(
-                "assets/images/factPage/${currentMonth}month.png",
+                "assets/images/factPage/${widget.currentMonth}month.png",
                 height: 35,
               ),
               title: Text(

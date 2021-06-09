@@ -26,24 +26,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> initState() {
     _selectedIndex = widget.selectedIndex > 0 ? widget.selectedIndex : 0;
 
-    final firebaseUser = Provider.of<User>(context, listen: false);
+    var firebaseUser = Provider.of<User>(context, listen: false);
     if (firebaseUser == null) {
       // TODO - handle error
     }
     Provider.of<UserService>(context, listen: false).getUser(firebaseUser.uid).then((userData) {
       setState(() {
         asiriUser = userData;
-        currentMonth = calculateCurrentMonth(DateTime.fromMillisecondsSinceEpoch(asiriUser.dueDate));
+        currentMonth = calculateCurrentMonth(DateTime.fromMillisecondsSinceEpoch(asiriUser.pregnantStartDate));
       });
     });
   }
 
   int calculateCurrentMonth(DateTime startDate) {
-    print(startDate);
     DateTime today = DateTime.now();
     int dateCount = today.difference(startDate).inDays;
-    print("date count ${dateCount.toString()}");
-    return (dateCount~/30)+1;
+    int month = (dateCount~/30)+1;
+    return month > 0? month : 1;
   }
 
   static const TextStyle optionStyle =
