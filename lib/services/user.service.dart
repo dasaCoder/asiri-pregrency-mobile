@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mother_and_baby/models/asiriUser.dart';
 import 'package:mother_and_baby/screens/reminders/addReminders.dart';
 
 class UserService {
@@ -14,6 +15,59 @@ class UserService {
     return _firestoreInstance
         .collection("mobile_app_users")
         .add(userDetails.toJson());
+  }
+
+  Future<AsiriUser> getUser(String uuid) async {
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _firestoreInstance
+        .collection("mobile_app_users")
+        .where("userId", isEqualTo: uuid)
+        .limit(1)
+        .get();
+    var user = snapshot.docs.first.data();
+    AsiriUser asiriUser = AsiriUser.fromJson(user);
+    return asiriUser;
+  }
+
+  DateTime calculateAndSaveDueDate(
+      String uuid, String method, DateTime selectedDate) {
+    DateTime dueDate = calculateDueDate(method, selectedDate);
+    _firestoreInstance
+        .collection("mobile_app_users")
+        .where("userId", isEqualTo: uuid)
+        .limit(1)
+        .get()
+        .then((snapshots) {
+      _firestoreInstance
+          .collection("mobile_app_users")
+          .doc(snapshots.docs.first.id)
+          .set({
+        "pregnantStartDate": selectedDate.millisecondsSinceEpoch,
+        "dueDate": dueDate.millisecondsSinceEpoch,
+        "calculatedMethod": method
+      }, SetOptions(merge: true));
+    });
+    return dueDate;
+  }
+
+  /// Function to calculate due date
+  /// source : https://www.whattoexpect.com/due-date-calculator/
+  DateTime calculateDueDate(String method, DateTime startDate) {
+    var optionsList = <String>[
+      'First day of last period',
+      'Conception date',
+      'IVF transfer date'
+    ];
+
+    DateTime dueDate;
+    if (method == optionsList[0]) {
+      dueDate = startDate.add(Duration(days: 280));
+    } else if (method == optionsList[1]) {
+      dueDate = startDate.add(Duration(days: 266));
+    } else if (method == optionsList[2]) {
+      dueDate = startDate.add(Duration(days: 266));
+    }
+
+    return dueDate;
   }
 
   /// Function to save diary data
@@ -58,24 +112,6 @@ class UserService {
   }
 }
 
-class AsiriUser {
-  final String userId;
-  final String name;
-  final String email;
-  final String telephone;
-  final String address;
-
-  AsiriUser(this.userId, this.name, this.email, this.telephone, this.address);
-
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'email': email,
-        'userId': userId,
-        'telephone': telephone,
-        'address': address
-      };
-}
-
 class DiaryData {
   final String type;
   final dynamic data;
@@ -85,8 +121,13 @@ class DiaryData {
 
   DiaryData(this.type, this.data);
 
-  Map<String, dynamic> toJson() =>
-      {'type': type, 'data': data, 'section': section, 'createdAt': createdAt, 'date': date};
+  Map<String, dynamic> toJson() => {
+        'type': type,
+        'data': data,
+        'section': section,
+        'createdAt': createdAt,
+        'date': date
+      };
 }
 
 class Note {

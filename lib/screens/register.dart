@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mother_and_baby/models/asiriUser.dart';
 import 'package:mother_and_baby/screens/Login.dart';
 import 'package:mother_and_baby/screens/home.dart';
+import 'package:mother_and_baby/screens/pregantDateScreen.dart';
 import 'package:mother_and_baby/services/auth.service.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:provider/provider.dart';
@@ -40,14 +42,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     validateBasicUserDetails();
     userDetails = AsiriUser(uuid, nameController.text, emailController.text,
         telephoneController.text, "");
-    Provider.of<UserService>(context, listen: false)
-        .saveUser(userDetails: userDetails)
-        .then((doc) {
-      // TODO - show snack bar
-
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
-    });
+    // Provider.of<UserService>(context, listen: false)
+    //     .saveUser(userDetails: userDetails)
+    //     .then((doc) {
+    //   // TODO - show snack bar
+    //
+    //   Navigator.of(context).push(
+    //       MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+    // });
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (BuildContext context) => PregnantDateScreen()));
   }
 
   void validateBasicUserDetails() {
@@ -149,7 +153,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               borderRadius: new BorderRadius.circular(30.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (BuildContext context) => PregnantDateScreen()));
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

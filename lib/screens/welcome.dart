@@ -17,15 +17,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     final firebaseUser = Provider.of<User>(context, listen: false);
     var timer = Timer(Duration(seconds: 2), ()=> {
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()))
-      // if(firebaseUser == null) {
-      //   Navigator.of(context).push(
-      //       MaterialPageRoute(builder: (BuildContext context) => LoginScreen()))
-      // } else {
-      //   Navigator.of(context).push(
-      //       MaterialPageRoute(builder: (BuildContext context) => DiaryScreen()))
-      // }
+      // Navigator.of(context).push(
+      //     MaterialPageRoute(builder: (BuildContext context) => HomeScreen()))
+      if(firebaseUser == null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => LoginScreen()))
+      } else {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => DiaryScreen()))
+      }
 
     });
     // timer.cancel();

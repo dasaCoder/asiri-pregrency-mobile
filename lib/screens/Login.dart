@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
         .then((result) {
       print(result);
       if (result) {
-        Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (BuildContext context) => HomeScreen()));
       } else {
         print("error is there " + result.toString());
