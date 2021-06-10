@@ -51,11 +51,13 @@ class _LandingPageState extends State<LandingPage> {
   AsiriUser updatableAsiriUser;
   @override
   void initState() {
-    Provider.of<UserService>(context, listen: false).getUser(widget.asiriUser.userId).then((userData) {
-      setState(() {
-        updatableAsiriUser = userData;
+    if(widget.asiriUser != null) {
+      Provider.of<UserService>(context, listen: false).getUser(widget.asiriUser.userId).then((userData) {
+        setState(() {
+          updatableAsiriUser = userData;
+        });
       });
-    });
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -127,7 +129,7 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   height: 25,
                 ),
-                Text(
+                if(widget.asiriUser != null) Text(
                   "Your due date is ${DateFormat("MMMM d, yyyy").format(DateTime.fromMillisecondsSinceEpoch(widget.asiriUser.dueDate))}",
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),

@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
+import 'package:mother_and_baby/screens/community/chatPage.dart';
+import 'package:mother_and_baby/screens/community/communityPage.dart';
 import 'package:mother_and_baby/screens/diary.dart';
 import 'package:mother_and_baby/screens/reminders/addReminders.dart';
 import 'package:mother_and_baby/screens/landingPage.dart';
@@ -60,10 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> _widgetOptions = <Widget>[
       DiaryScreen(),
       LandingPage(asiriUser: asiriUser, currentMonth: currentMonth,),
-      Text(
-        'Index 2: School',
-        style: optionStyle,
-      ),
+      CommunityPage(asiriUser: asiriUser,),
     ];
 
     return Scaffold(
@@ -100,16 +99,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _bottomButtons() {
-    return _selectedIndex == 100
+    return _selectedIndex == 2
         ? FloatingActionButton(
         shape: StadiumBorder(),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => AddReminderScreen()));
+              builder: (BuildContext context) => ChatPage(asiriUser: asiriUser,)));
         },
         backgroundColor: Colors.blue,
         child: Icon(
-          Icons.add,
+          Icons.message,
           size: 20.0,
         ))
         : null;

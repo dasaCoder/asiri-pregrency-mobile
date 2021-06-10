@@ -1,28 +1,32 @@
-import 'dart:convert';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
+import 'package:mother_and_baby/models/communityPost.dart';
+import 'package:mother_and_baby/models/message.dart';
 import 'package:mother_and_baby/screens/reminders/addReminders.dart';
 
 class UserService {
   final FirebaseFirestore _firestoreInstance;
   final DBNAME = "mobile_app_users";
+  final COMMUNITY_DB = "community_post";
+  final MESSAGE_DB = "messages";
 
   UserService(this._firestoreInstance);
 
   Future<DocumentReference> saveUser({userDetails: AsiriUser}) {
-    return _firestoreInstance
-        .collection(DBNAME)
-        .add(userDetails.toJson());
+    return _firestoreInstance.collection(DBNAME).add(userDetails.toJson());
   }
 
   Future<void> incrementKickCount(String uuid) {
-    return _firestoreInstance.collection(DBNAME).where("userId", isEqualTo: uuid).limit(1).get().then((snapshot){
-      _firestoreInstance.collection(DBNAME).doc(snapshot.docs.first.id).set({
-        "kickCount" : FieldValue.increment(1)
-      }, SetOptions(merge: true));
+    return _firestoreInstance
+        .collection(DBNAME)
+        .where("userId", isEqualTo: uuid)
+        .limit(1)
+        .get()
+        .then((snapshot) {
+      _firestoreInstance
+          .collection(DBNAME)
+          .doc(snapshot.docs.first.id)
+          .set({"kickCount": FieldValue.increment(1)}, SetOptions(merge: true));
     });
   }
 
@@ -113,12 +117,48 @@ class UserService {
     return _firestoreInstance.collection("reminder_data").snapshots();
   }
 
-  /// Function to retrive reminders on given type
+  /// Function to retrieve reminders on given type
   Stream<QuerySnapshot<dynamic>> getRemindersBuType(ReminderType reminderType) {
     return _firestoreInstance
         .collection("reminder_data")
         .where("reminderType", isEqualTo: reminderType.toString())
         .snapshots();
+  }
+
+  /// Save community post
+  Future<void> saveCommunityPost(CommunityPost communityPost) {
+    return _firestoreInstance
+        .collection(COMMUNITY_DB)
+        .add(communityPost.toJson());
+  }
+
+  Future<void> likePost(String docId, String userId) {
+    return _firestoreInstance.collection(COMMUNITY_DB).doc(docId).set({
+      "likedUserIdList": FieldValue.arrayUnion([userId])
+    }, SetOptions(merge: true));
+  }
+
+  Future<void> unlikePost(String docId, String userId) {
+    return _firestoreInstance.collection(COMMUNITY_DB).doc(docId).set({
+      "likedUserIdList": FieldValue.arrayRemove([userId])
+    }, SetOptions(merge: true));
+  }
+
+  Stream<QuerySnapshot<dynamic>> getCommunityPosts() {
+    return _firestoreInstance.collection(COMMUNITY_DB).limit(20).snapshots();
+  }
+
+  /// Save message
+  Future<void> saveMessage(Message message) {
+    return _firestoreInstance
+        .collection(MESSAGE_DB)
+        .add(message.toJson());
+  }
+
+  Stream<QuerySnapshot<dynamic>> getMessages() {
+    return _firestoreInstance.collection(MESSAGE_DB)
+        .orderBy("createdAt")
+        .limit(20).snapshots();
   }
 }
 

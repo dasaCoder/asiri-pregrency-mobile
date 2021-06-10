@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
         .signInWithGoogle()
         .then((result) {
       Navigator.of(context).push(
-          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen(selectedIndex: 1,)));
     });
   }
 
