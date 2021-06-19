@@ -21,10 +21,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       //     MaterialPageRoute(builder: (BuildContext context) => HomeScreen()))
       if(firebaseUser == null) {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => LoginScreen()))
+            MaterialPageRoute(builder: (BuildContext context) => HomeScreen()))
       } else {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => DiaryScreen()))
+            MaterialPageRoute(builder: (BuildContext context) => HomeScreen()))
       }
 
     });

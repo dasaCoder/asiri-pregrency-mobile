@@ -89,8 +89,8 @@ class _LandingPageState extends State<LandingPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          // Scaffold.of(context).openDrawer();
-                          Navigator.of(context).pop();
+                          Scaffold.of(context).openDrawer();
+                          // Navigator.of(context).pop();
                         },
                         child: Container(
                           margin: EdgeInsets.only(right: 15),

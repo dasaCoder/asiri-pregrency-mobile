@@ -22,6 +22,8 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
   TimeOfDay selectedTime;
   MedicineType selectedMedicineType = MedicineType.INJECTION;
   var medIntakeFrequency = "Once daily";
+  var medStrength = "drops";
+
   final _form = GlobalKey<FormState>();
   bool showProgressBar = false;
 
@@ -40,14 +42,23 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
       showProgressBar = true;
     });
 
+    var description = "It's time to take " +
+        medStrengthController.text +
+        " " +
+        medStrength +
+        " of " +
+        nameController.text;
     Reminder reminder = Reminder(
         nameController.text,
-        medStrengthController.text,
+        description,
         selectedTime.hour,
         selectedTime.minute,
         medIntakeFrequency,
         selectedMedicineType,
-        ReminderType.MEDICINE, 0,0,0);
+        ReminderType.MEDICINE,
+        0,
+        0,
+        0);
 
     var idTmp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
@@ -59,7 +70,12 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
       var idList = [idTmp, (idTmp + 1)];
       reminder.reminderIds = idList;
       scheduleTwiceDailyNotification(reminder);
-    } else {}
+    } else if (medIntakeFrequency.contains("3 times a day")) {
+      var idList = [idTmp, (idTmp + 1), (idTmp + 2)];
+      reminder.reminderIds = idList;
+      scheduleTriceDailyNotification(reminder);
+    } else {
+    }
 
     Provider.of<UserService>(context, listen: false).saveReminder(reminder);
 
@@ -480,23 +496,64 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
                               color: Color.fromRGBO(60, 180, 242, 1)),
                           borderRadius: new BorderRadius.circular(10.0),
                         ),
-                        child: Padding(
-                            padding: EdgeInsets.only(left: 25, right: 15),
-                            child: TextFormField(
-                                obscureText: false,
-                                validator: (text) {
-                                  if (text.isEmpty)
-                                    return "Please enter a valid value";
-                                  else
-                                    return null;
-                                },
-                                keyboardType: TextInputType.number,
-                                controller: medStrengthController,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  contentPadding:
-                                      EdgeInsets.only(top: 5, bottom: 5),
-                                )))),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                  padding: EdgeInsets.only(left: 25, right: 15),
+                                  child: TextFormField(
+                                      obscureText: false,
+                                      validator: (text) {
+                                        if (text.isEmpty)
+                                          return "Please enter a valid value";
+                                        else
+                                          return null;
+                                      },
+                                      keyboardType: TextInputType.number,
+                                      controller: medStrengthController,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        contentPadding:
+                                            EdgeInsets.only(top: 5, bottom: 5),
+                                      ))),
+                            ),
+                            Expanded(
+                              child: Container(
+                                  child: Padding(
+                                padding: EdgeInsets.only(left: 25, right: 15),
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  value: medStrength,
+                                  // icon: const Icon(Icons.arrow_downward),
+                                  // iconSize: 24,
+                                  elevation: 16,
+                                  style: const TextStyle(
+                                      color: Colors.black87,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      medStrength = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'drops',
+                                    'pills',
+                                    'mg',
+                                    'IU',
+                                    'mcg',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                              )),
+                            ),
+                          ],
+                        )),
 
                     /// start time
                     Container(

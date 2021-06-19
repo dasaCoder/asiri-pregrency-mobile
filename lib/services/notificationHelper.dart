@@ -142,6 +142,14 @@ Future<void> scheduleTwiceDailyNotification(Reminder reminder) async {
   scheduleOnceDailyNotification(reminder.reminderIds[1], reminder);
 }
 
+Future<void> scheduleTriceDailyNotification(Reminder reminder) async {
+  scheduleOnceDailyNotification(reminder.reminderIds[0], reminder);
+  reminder.startTimeHour = reminder.startTimeHour + 8;
+  scheduleOnceDailyNotification(reminder.reminderIds[1], reminder);
+  reminder.startTimeHour = reminder.startTimeHour + 8;
+  scheduleOnceDailyNotification(reminder.reminderIds[2], reminder);
+}
+
 Future<List<PushNotification>> getAllNotifications() async {
   return AwesomeNotifications().listScheduledNotifications();
 }
