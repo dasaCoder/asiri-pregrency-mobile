@@ -95,10 +95,9 @@ class _LandingPageState extends State<LandingPage> {
                         child: Container(
                           margin: EdgeInsets.only(right: 15),
                           width: 30,
-                          child: Icon(
-                            Icons.arrow_back_rounded,
-                            size: 25,
-                            color: Colors.white,
+                          child: Image.asset(
+                            "assets/images/drawer/burger.png",
+                            height: 15,
                           ),
                         ),
                       ),

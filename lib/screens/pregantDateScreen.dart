@@ -54,7 +54,7 @@ class _PregnantDateScreenState extends State<PregnantDateScreen> {
     dueDate = Provider.of<UserService>(context, listen: false)
         .calculateAndSaveDueDate(
             firebaseUser.uid, dueDateCalculateMethod, selectedDate);
-
+    print(firebaseUser);
     print(dueDate);
     if(dueDate != null) {
       setState(() {

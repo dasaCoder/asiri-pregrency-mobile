@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:mother_and_baby/main.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 import 'package:mother_and_baby/services/notificationHelper.dart';
 
 enum MedicineType { INJECTION, PILLS, INHALER, DROPS, OTHER }

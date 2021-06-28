@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
@@ -29,9 +30,12 @@ class _DiaryScreenState extends State<DiaryScreen> {
   DateTime _selectedDay = DateTime.now();
   DateTime firstDay = DateTime.parse("2021-01-01");
   DateTime lastDay = DateTime.parse("2025-01-01");
+  String userId;
 
   @override
   Widget build(BuildContext context) {
+    userId = Provider.of<User>(context).uid;
+
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -107,7 +111,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 /**
                  * Diary details for date
                  */
-                DiaryDataWidget(),
+                DiaryDataWidget(uuid: userId,),
 
                 Container(
                   decoration: new BoxDecoration(
@@ -277,7 +281,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                     ],
                   ),
                 ),
-                SymptomsWidget(selectedDate: "${_selectedDay.year}-${_selectedDay.year}-${_selectedDay.year}",),
+                SymptomsWidget(selectedDate: "${_selectedDay.year}-${_selectedDay.year}-${_selectedDay.year}", userId: userId,),
               ],
             ),
           ),

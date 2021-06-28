@@ -7,6 +7,7 @@ import 'package:mother_and_baby/screens/home.dart';
 import 'package:mother_and_baby/screens/midWifePage.dart';
 import 'package:mother_and_baby/screens/excersicePage.dart';
 import 'package:mother_and_baby/screens/reminders/reminders.dart';
+import 'package:mother_and_baby/screens/settings.dart';
 import 'package:mother_and_baby/screens/specialistPage.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:mother_and_baby/widgets/drawerItem.dart';
@@ -54,16 +55,16 @@ class _NavDrawerState extends State<NavDrawer> {
         {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => ReminderScreen(
-                reminderType: ReminderType.DOCTOR,
-              )));
+                    reminderType: ReminderType.DOCTOR,
+                  )));
         }
         break;
       case "VACCINE_REMINDER":
         {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => ReminderScreen(
-                reminderType: ReminderType.VACCINE,
-              )));
+                    reminderType: ReminderType.VACCINE,
+                  )));
         }
         break;
       case "SPECIALIST_PAGE":
@@ -131,12 +132,28 @@ class _NavDrawerState extends State<NavDrawer> {
                   ],
                 ),
               ),
-              Container(
-                child: Image.asset(
-                  "assets/images/drawer/avatar.png",
-                  height: 150,
-                  width: 150,
-                ),
+              Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      "assets/images/drawer/avatar.png",
+                      height: 150,
+                      width: 150,
+                    ),
+                  ),
+                  Positioned(
+                    right: 50,
+                    bottom: 0,
+                    child: IconButton(
+                      icon: Icon(Icons.settings),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) => SettingsScreen()));
+                      },
+                    ),
+                  )
+                ],
               ),
 
               DrawerListItem(
@@ -165,7 +182,8 @@ class _NavDrawerState extends State<NavDrawer> {
                         DrawerListItem(
                           title: Languages.of(context).appoinmentsReminder,
                           imagePath: "tie.png",
-                          onClicked: ()=>  navigateToPage(context, "DOCTOR_REMINDER"),
+                          onClicked: () =>
+                              navigateToPage(context, "DOCTOR_REMINDER"),
                         ),
                         DrawerListItem(
                           title: Languages.of(context).vaccineReminder,

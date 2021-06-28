@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationService {
@@ -24,14 +25,13 @@ class AuthenticationService {
     }
   }
 
-  Future<bool> signUp({String email, String password}) async {
+  Future<UserCredential> signUp({String email, String password}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      return _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return true;
     } on FirebaseAuthException catch (e) {
       print(e.message);
-      return false;
+      return null;
     }
   }
 
@@ -51,5 +51,28 @@ class AuthenticationService {
 
     // Once signed in, return the UserCredential
     return _firebaseAuth.signInWithCredential(credential);
+  }
+
+  Future<UserCredential> signInWithFacebook() async {
+    FacebookAuth facebookAuth = FacebookAuth.instance;
+    bool isLogged = await facebookAuth.accessToken != null;
+    if (!isLogged) {
+      LoginResult result = await facebookAuth
+          .login(); // by default we request the email and the public profile
+      if (result.status == LoginStatus.success) {
+        // you are logged
+        AccessToken token = await facebookAuth.accessToken;
+        UserCredential authResult = await _firebaseAuth
+            .signInWithCredential(
+            FacebookAuthProvider.credential(token.token));
+        return authResult;
+      }
+    } else {
+      AccessToken token = await facebookAuth.accessToken;
+      UserCredential authResult = await _firebaseAuth
+          .signInWithCredential(
+          FacebookAuthProvider.credential(token.token));
+      return authResult;
+    }
   }
 }

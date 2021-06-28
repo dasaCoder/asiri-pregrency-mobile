@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentMonth = 1;
   @override
   Future<void> initState() {
-    _selectedIndex = widget.selectedIndex > 0 ? widget.selectedIndex : 0;
+    _selectedIndex = widget.selectedIndex > 0 ? widget.selectedIndex : 1;
 
     var firebaseUser = Provider.of<User>(context, listen: false);
     if (firebaseUser == null) {

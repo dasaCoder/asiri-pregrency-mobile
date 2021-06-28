@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/services/user.service.dart';
@@ -25,6 +26,13 @@ class _AddNoteAlertDialogState extends State<AddNoteAlertDialog> {
 
   List<File> _selectedImages = <File>[];
   bool showProgressBar = false;
+  String uuid;
+  @override
+  void initState() {
+    final firebaseUser = Provider.of<User>(this.context, listen: false);
+    uuid = firebaseUser.uid;
+  }
+
   openImportFile() async {
     FilePickerResult result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
@@ -66,7 +74,8 @@ class _AddNoteAlertDialogState extends State<AddNoteAlertDialog> {
     }
     Note note = Note(titleController.text, descriptionController.text,
         widget.selectedDate, downloadUrls);
-    DiaryData diaryData = DiaryData(LIFE_EVENT, note.toJson());
+    DiaryData diaryData = DiaryData(LIFE_EVENT, note.toJson(),);
+    diaryData.userId = uuid;
     diaryData.section = "NOTE";
     Provider.of<UserService>(context, listen: false)
         .saveDiaryData(diaryData);

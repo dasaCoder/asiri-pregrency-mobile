@@ -20,6 +20,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var telephoneController = TextEditingController();
   var passwordController = TextEditingController();
   var rePasswordController = TextEditingController();
+  final _form = GlobalKey<FormState>();
+
   String uuid;
   AsiriUser userDetails;
 
@@ -38,14 +40,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
   }
 
+  void registerUserWithUserNameAndPassword(BuildContext context) {
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return null;
+    }
+    Provider.of<AuthenticationService>(context, listen: false)
+      .signUp(email: emailController.text, password: passwordController.text)
+      .then((result) {
+        if(result != null) {
+          uuid = result.user.uid;
+          socialRegister(context);
+        } else {
+          final snackBar = SnackBar(content: Text('Something occurred! please try again'), backgroundColor: Colors.red,);
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+    });
+  }
+
   void socialRegister(BuildContext context) {
-    validateBasicUserDetails();
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return null;
+    }
     userDetails = AsiriUser(uuid, nameController.text, emailController.text,
         telephoneController.text, "");
     Provider.of<UserService>(context, listen: false)
         .saveUser(userDetails: userDetails)
         .then((doc) {
-      // TODO - show snack bar
+      final snackBar = SnackBar(content: Text('Account created successfully!'), backgroundColor: Colors.green,);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (BuildContext context) => PregnantDateScreen()));
@@ -56,12 +80,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void validateBasicUserDetails() {
-    if (uuid.isEmpty) {
-      // some issue happend in authentication
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return null;
     }
-    if (nameController.text.isEmpty) {}
-    if (emailController.text.isEmpty) {}
-    // TODO - validate telephone no and email format
   }
 
   @override
@@ -98,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 15),
                 child: Form(
+                  key: _form,
                   child: Column(
                     children: [
                       SizedBox(
@@ -213,6 +236,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: TextFormField(
                                   obscureText: false,
                                   controller: nameController,
+                                  validator: (text) {
+                                    if (text.isEmpty)
+                                      return "Please enter a valid name";
+                                    else
+                                      return null;
+                                  },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     labelText: 'Name',
@@ -234,6 +263,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: TextFormField(
                                   obscureText: false,
                                   controller: emailController,
+                                  validator: (text) {
+                                    bool isEmailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(text);
+                                    if (text.isEmpty || !isEmailValid)
+                                      return "Please enter a valid email";
+                                    else
+                                      return null;
+                                  },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     labelText: 'Email',
@@ -255,12 +291,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: TextFormField(
                                   obscureText: false,
                                   controller: telephoneController,
+                                  validator: (text) {
+                                    bool isTelephoneValid = RegExp(r"07(\d{8})").hasMatch(text);
+                                    if (text.isEmpty || !isTelephoneValid)
+                                      return "Please enter a valid telephone number";
+                                    else
+                                      return null;
+                                  },
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly
                                   ],
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     labelText: 'Telephone Number',
+                                    hintText: '07XXXXXXXX',
                                     contentPadding:
                                         EdgeInsets.only(top: 5, bottom: 5),
                                   )))),
@@ -280,6 +324,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: TextFormField(
                                     obscureText: true,
                                     controller: passwordController,
+                                    validator: (text) {
+                                      if (text.isEmpty)
+                                        return "Please enter a valid password";
+                                      else if (text.length < 6)
+                                        return "Password should have more than 6 letters";
+                                      else
+                                        return null;
+                                    },
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       labelText: 'Password',
@@ -303,6 +355,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: TextFormField(
                                     obscureText: true,
                                     controller: rePasswordController,
+                                    validator: (text) {
+                                      if (text.isEmpty)
+                                        return "Please enter a valid password";
+                                      else if (text != passwordController.text)
+                                        return "Passwords are not matched";
+                                      else
+                                        return null;
+                                    },
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       labelText: 'Re-enter Password',
@@ -325,7 +385,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onPressed: () {
                             if (isSocialSignUp) {
                               socialRegister(context);
-                            } else {}
+                            } else {
+                              registerUserWithUserNameAndPassword(context);
+                            }
                           },
                           child: Container(
                             padding: EdgeInsets.all(10),
@@ -352,7 +414,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   TextStyle(fontSize: 15, color: Colors.grey)),
                           TextButton(
                               onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         LoginScreen()));
                               },

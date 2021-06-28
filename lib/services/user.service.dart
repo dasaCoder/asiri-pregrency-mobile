@@ -88,15 +88,19 @@ class UserService {
   /// this includes, notes, weight & temperature etc
   Future<DocumentReference> saveDiaryData(DiaryData diaryData) {
     diaryData.createdAt = DateTime.now().millisecondsSinceEpoch;
+    print("user is " + diaryData.userId);
     diaryData.date = diaryData.data['date'];
     return _firestoreInstance.collection("diary_data").add(diaryData.toJson());
   }
 
-  Stream<QuerySnapshot<dynamic>> getDiaryData() {
+  Stream<QuerySnapshot<dynamic>> getDiaryData(String uuid, String date) {
+    DateTime now = DateTime.now();
+    var beginningDate = DateTime(now.year, now.month, now.day).millisecondsSinceEpoch;
+    print(beginningDate);
     return _firestoreInstance
         .collection("diary_data")
-        // .where("section", isEqualTo: "LIFE_STYLE")
-        .orderBy("createdAt")
+        .where("userId", isEqualTo: uuid)
+        .where("createdAt", isGreaterThanOrEqualTo: beginningDate)
         .snapshots();
   }
 
@@ -165,6 +169,7 @@ class UserService {
 class DiaryData {
   final String type;
   final dynamic data;
+  String userId;
   String section = "LIFE_STYLE";
   String date;
   int createdAt;
@@ -176,7 +181,8 @@ class DiaryData {
         'data': data,
         'section': section,
         'createdAt': createdAt,
-        'date': date
+        'date': date,
+        'userId': userId
       };
 }
 

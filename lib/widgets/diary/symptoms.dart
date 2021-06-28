@@ -4,8 +4,8 @@ import 'package:mother_and_baby/widgets/diary/symptomsRecorder.dart';
 
 class SymptomsWidget extends StatefulWidget {
   final String selectedDate;
-
-  const SymptomsWidget({Key key, this.selectedDate}) : super(key: key);
+  final String userId;
+  const SymptomsWidget({Key key, this.selectedDate, this.userId}) : super(key: key);
   @override
   _SymptomsWidgetState createState() => _SymptomsWidgetState();
 }
@@ -92,6 +92,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Vomiting",
                                     iconData: Icons.mood_bad_outlined,
@@ -127,6 +128,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Urinating",
                                     iconData: Icons.wc_outlined,
@@ -171,6 +173,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Breast Sensitivity",
                                     iconData: Icons.sentiment_satisfied_outlined,
@@ -218,6 +221,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Headache",
                                     iconData: Icons.sentiment_very_dissatisfied_outlined,
@@ -253,6 +257,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Hunger",
                                     iconData: Icons.restaurant_outlined,
@@ -296,6 +301,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Cravings",
                                     iconData: Icons.lunch_dining,
@@ -332,6 +338,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Stress",
                                     iconData: Icons.sentiment_very_dissatisfied_outlined,
@@ -367,6 +374,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Tension",
                                     iconData: Icons.sentiment_neutral_outlined,
@@ -410,6 +418,7 @@ class _SymptomsWidgetState extends State<SymptomsWidget> {
                               context: context,
                               builder: (BuildContext context) {
                                 return SymptomsRecorder(
+                                    userId: widget.userId,
                                     selectedDate: widget.selectedDate,
                                     title: "Gas",
                                     iconData: Icons.masks_outlined,

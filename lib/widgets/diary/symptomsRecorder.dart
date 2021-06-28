@@ -10,13 +10,14 @@ class SymptomsRecorder extends StatefulWidget {
   final IconData iconData;
   final Color iconsColor;
   final String symptomIconName;
+  final String userId;
   const SymptomsRecorder(
       {Key key,
       this.selectedDate,
       this.title,
       this.iconData,
       this.symptomIconName,
-      this.iconsColor})
+      this.iconsColor, this.userId})
       : super(key: key);
 
   @override
@@ -38,6 +39,8 @@ class _SymptomsRecorderState extends State<SymptomsRecorder> {
       "symptom": widget.title
     });
     diaryData.section = "SYMPTOMS";
+    diaryData.userId = widget.userId;
+    print(diaryData.userId);
     Provider.of<UserService>(context, listen: false)
         .saveDiaryData(diaryData)
         .then((doc) => print(doc));

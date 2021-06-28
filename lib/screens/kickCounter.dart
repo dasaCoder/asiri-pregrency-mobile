@@ -13,25 +13,28 @@ class KickCounter extends StatefulWidget {
 
 class _KickCounterState extends State<KickCounter> {
   AsiriUser updatableAsiriUser;
-  int kickCount  = 0;
+  int kickCount = 0;
   @override
   void initState() {
-    Provider.of<UserService>(context, listen: false).getUser(widget.asiriUser.userId).then((userData) {
+    Provider.of<UserService>(context, listen: false)
+        .getUser(widget.asiriUser.userId)
+        .then((userData) {
       setState(() {
         updatableAsiriUser = userData;
-        kickCount = updatableAsiriUser.kickCount != null ? updatableAsiriUser.kickCount : 0;
+        kickCount = updatableAsiriUser.kickCount != null
+            ? updatableAsiriUser.kickCount
+            : 0;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery
-        .of(context)
-        .size;
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        constraints: BoxConstraints(minHeight: screenSize.height, minWidth: screenSize.width),
+        constraints: BoxConstraints(
+            minHeight: screenSize.height, minWidth: screenSize.width),
         decoration: BoxDecoration(
             color: Colors.white,
             image: DecorationImage(
@@ -47,16 +50,16 @@ class _KickCounterState extends State<KickCounter> {
                 Container(
                   child: Text(
                     "${kickCount.toString()}",
-                    style: new TextStyle(
-                        fontSize: 60, color: Colors.purple),
+                    style: new TextStyle(fontSize: 60, color: Colors.purple),
                   ),
                 ),
                 Text(
                   "Kicks 😍😍",
-                  style: new TextStyle(
-                      fontSize: 18, color: Colors.purple),
+                  style: new TextStyle(fontSize: 18, color: Colors.purple),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   width: double.infinity,
                   margin: EdgeInsets.only(left: 100, right: 100),
@@ -72,15 +75,19 @@ class _KickCounterState extends State<KickCounter> {
                       setState(() {
                         kickCount++;
                       });
-                      Provider.of<UserService>(context, listen: false).incrementKickCount(widget.asiriUser.userId);
+                      Provider.of<UserService>(context, listen: false)
+                          .incrementKickCount(widget.asiriUser.userId);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.only(top: 5, bottom: 5),
+                            padding: EdgeInsets.only(top: 5, bottom: 5),
                             width: 50,
-                            child: Icon(Icons.add, size: 30,)),
+                            child: Icon(
+                              Icons.add,
+                              size: 30,
+                            )),
                       ],
                     ),
                   ),

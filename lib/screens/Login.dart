@@ -7,8 +7,13 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final _form = GlobalKey<FormState>();
 
   Future<bool> login(BuildContext context, String email, String password) {
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return null;
+    }
     Provider.of<AuthenticationService>(context, listen: false)
         .signIn(email: email, password: password)
         .then((result) {
@@ -17,13 +22,13 @@ class LoginScreen extends StatelessWidget {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (BuildContext context) => HomeScreen()));
       } else {
-        print("error is there " + result.toString());
+        final snackBar = SnackBar(content: Text('User name or password is wrong! Please try again'), backgroundColor: Colors.red,);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     });
   }
 
   Future<bool> loginWithGoogle(BuildContext context) {
-    print("login wiht goole");
     Provider.of<AuthenticationService>(context, listen: false)
         .signInWithGoogle()
         .then((result) {
@@ -66,6 +71,7 @@ class LoginScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 20),
                 child: Form(
+                  key: _form,
                   child: Column(
                     children: [
                       SizedBox(
@@ -83,6 +89,13 @@ class LoginScreen extends StatelessWidget {
                               child: TextFormField(
                                   obscureText: false,
                                   controller: emailController,
+                                  validator: (text) {
+                                    bool isEmailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(text);
+                                    if (text.isEmpty || !isEmailValid)
+                                      return "Please enter a valid email";
+                                    else
+                                      return null;
+                                  },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     labelText: 'Email',
@@ -104,6 +117,12 @@ class LoginScreen extends StatelessWidget {
                               child: TextFormField(
                                   obscureText: true,
                                   controller: passwordController,
+                                  validator: (text) {
+                                    if (text.isEmpty)
+                                      return "Please enter a valid password";
+                                    else
+                                      return null;
+                                  },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     labelText: 'Password',
@@ -206,7 +225,15 @@ class LoginScreen extends StatelessWidget {
                               borderRadius: new BorderRadius.circular(30.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            // TODO - fix fb problem
+                            // Provider.of<AuthenticationService>(context, listen: false)
+                            //     .signInWithFacebook()
+                            //     .then((result) {
+                            //   Navigator.of(context).push(
+                            //       MaterialPageRoute(builder: (BuildContext context) => HomeScreen(selectedIndex: 1,)));
+                            // });
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -243,7 +270,7 @@ class LoginScreen extends StatelessWidget {
                                   TextStyle(fontSize: 15, color: Colors.grey)),
                           TextButton(
                               onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         RegisterScreen()));
                               },
