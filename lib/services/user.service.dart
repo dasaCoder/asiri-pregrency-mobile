@@ -149,7 +149,7 @@ class UserService {
   }
 
   Stream<QuerySnapshot<dynamic>> getCommunityPosts() {
-    return _firestoreInstance.collection(COMMUNITY_DB).limit(20).snapshots();
+    return _firestoreInstance.collection(COMMUNITY_DB).orderBy("createdAt", descending: true).limit(20).snapshots();
   }
 
   /// Save message

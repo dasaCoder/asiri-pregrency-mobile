@@ -70,7 +70,7 @@ class _CommunityPageState extends State<CommunityPage> {
 
     CommunityPost post = CommunityPost(txtController.text, downloadUrls,
         widget.asiriUser.userId, DateTime.now().millisecondsSinceEpoch);
-
+    post.userData = widget.asiriUser;
     Provider.of<UserService>(context, listen: false).saveCommunityPost(post);
     setState(() {
       _selectedImages = [];
@@ -123,7 +123,6 @@ class _CommunityPageState extends State<CommunityPage> {
                   ],
                 ),
               ),
-
               Container(
                 margin: EdgeInsets.only(left: 25, right: 25, top: 10),
                 child: Column(
@@ -232,7 +231,9 @@ class _CommunityPageState extends State<CommunityPage> {
                           child: CircularProgressIndicator(),
                         );
                       } else {
+                        print(snapshot.data.docs.length);
                         return ListView.builder(
+                            physics: const AlwaysScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: snapshot.data.docs.length,
                             itemBuilder: (context, index) {
@@ -247,10 +248,14 @@ class _CommunityPageState extends State<CommunityPage> {
                                   children: [
                                     Row(
                                       children: [
-                                        CircleAvatar(
-                                          child: Icon(
-                                              Icons.account_circle_outlined),
-                                        ),
+                                        post.userData.imageUrl != ""
+                                            ? CircleAvatar(
+                                                backgroundImage: NetworkImage(
+                                                    post.userData.imageUrl))
+                                            : CircleAvatar(
+                                                child: Icon(Icons
+                                                    .account_circle_outlined),
+                                              ),
                                         Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -328,23 +333,23 @@ class _CommunityPageState extends State<CommunityPage> {
                                                 },
                                               )
                                             : IconButton(
-                                              icon: Icon(
+                                                icon: Icon(
                                                   Icons.favorite,
                                                   color: Colors.red,
                                                 ),
-                                          onPressed: () =>{
-                                            Provider.of<UserService>(
-                                                context,
-                                                listen: false)
-                                                .unlikePost(
-                                                snapshot.data
-                                                    .docs[index].id,
-                                                widget
-                                                    .asiriUser.userId)
-                                          },
-                                            ),
-
-                                        Text("${post.likedUserIdList != null ? post.likedUserIdList.length.toString() : 0} likes")
+                                                onPressed: () => {
+                                                  Provider.of<UserService>(
+                                                          context,
+                                                          listen: false)
+                                                      .unlikePost(
+                                                          snapshot.data
+                                                              .docs[index].id,
+                                                          widget
+                                                              .asiriUser.userId)
+                                                },
+                                              ),
+                                        Text(
+                                            "${post.likedUserIdList != null ? post.likedUserIdList.length.toString() : 0} likes")
                                       ],
                                     ),
                                     Divider(

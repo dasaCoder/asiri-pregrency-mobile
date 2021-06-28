@@ -141,25 +141,29 @@ class _DiaryScreenState extends State<DiaryScreen> {
                     },
                   ),
                 ),
-                Container(
-                  decoration: new BoxDecoration(
-                      color: Color.fromRGBO(199, 233, 251, 1),
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  padding:
-                      EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-                  margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: ListTile(
-                    title: Text(
-                      Languages.of(context).diaryMedicine,
-                      style: new TextStyle(
-                          color: Color.fromRGBO(70, 72, 162, 1), fontSize: 16),
-                    ),
-                    trailing: Image.asset(
-                      "assets/images/diary/vitamins.png",
-                      height: 40,
-                    ),
-                  ),
-                ),
+
+                /// Add medicine/vitamins
+                // Container(
+                //   decoration: new BoxDecoration(
+                //       color: Color.fromRGBO(199, 233, 251, 1),
+                //       borderRadius: BorderRadius.all(Radius.circular(10))),
+                //   padding:
+                //       EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+                //   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                //   child: ListTile(
+                //     title: Text(
+                //       Languages.of(context).diaryMedicine,
+                //       style: new TextStyle(
+                //           color: Color.fromRGBO(70, 72, 162, 1), fontSize: 16),
+                //     ),
+                //     trailing: Image.asset(
+                //       "assets/images/diary/vitamins.png",
+                //       height: 40,
+                //     ),
+                //   ),
+                // ),
+
+
                 Container(
                   decoration: new BoxDecoration(
                       color: Color.fromRGBO(199, 233, 251, 1),
@@ -204,6 +208,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                   return AddWeightDialog(
                                     selectedDate:
                                         dateFormatter.format(_selectedDay),
+                                    userId: userId,
                                   );
                                 });
                           },
@@ -239,6 +244,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                   return AddTemperatureDialog(
                                     selectedDate:
                                         dateFormatter.format(_selectedDay),
+                                    userId: userId,
                                   );
                                 });
                           },
@@ -273,6 +279,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                   return AddWaterIntake(
                                     selectedDate:
                                         dateFormatter.format(_selectedDay),
+                                    userId: userId,
                                   );
                                 });
                           },

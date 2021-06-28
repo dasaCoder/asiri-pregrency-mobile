@@ -4,12 +4,13 @@ class AsiriUser {
   final String email;
   final String telephone;
   final String address;
+  final String imageUrl;
   String calculatedMethod;
   int pregnantStartDate;
   int dueDate;
   int kickCount;
 
-  AsiriUser(this.userId, this.name, this.email, this.telephone, this.address);
+  AsiriUser(this.userId, this.name, this.email, this.telephone, this.address, this.imageUrl,);
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -21,6 +22,7 @@ class AsiriUser {
         'pregnantStartDate': pregnantStartDate,
         'dueDate': dueDate,
         'kickCount': kickCount,
+        'imageUrl': imageUrl,
       };
 
   AsiriUser.fromJson(Map<String, dynamic> json)
@@ -32,5 +34,6 @@ class AsiriUser {
         calculatedMethod = json["calculatedMethod"],
         pregnantStartDate = json["pregnantStartDate"],
         dueDate = json["dueDate"],
+        imageUrl = json["imageUrl"],
         kickCount = json["kickCount"];
 }

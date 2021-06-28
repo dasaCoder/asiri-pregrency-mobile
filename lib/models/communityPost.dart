@@ -1,10 +1,13 @@
+import 'package:mother_and_baby/models/asiriUser.dart';
+
 class CommunityPost {
   final String text;
   final List<dynamic> imageList;
   final String userId;
   int likeCount;
   final int createdAt;
-  List<dynamic> likedUserIdList;
+  AsiriUser userData;
+  List<dynamic> likedUserIdList = [];
 
   CommunityPost(this.text, this.imageList, this.userId, this.createdAt);
 
@@ -14,7 +17,8 @@ class CommunityPost {
         'likedUserIdList': likedUserIdList.toList(),
         'likeCount': likeCount,
         'userId': userId,
-        'createdAt': createdAt
+        'createdAt': createdAt,
+        'userData': userData.toJson()
       };
 
   CommunityPost.fromJson(Map<String, dynamic> json)
@@ -23,5 +27,6 @@ class CommunityPost {
         imageList = json["imageList"],
         createdAt = json["createdAt"],
         likedUserIdList = json["likedUserIdList"],
+        userData = AsiriUser.fromJson(json["userData"]),
         userId = json["userId"];
 }

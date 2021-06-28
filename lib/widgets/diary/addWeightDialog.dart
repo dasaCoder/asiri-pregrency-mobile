@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 
 class AddWeightDialog extends StatefulWidget {
   final String selectedDate;
-
-  const AddWeightDialog({Key key, this.selectedDate}) : super(key: key);
+  final String userId;
+  const AddWeightDialog({Key key, this.selectedDate, this.userId}) : super(key: key);
 
   @override
   _AddWeightDialogState createState() => _AddWeightDialogState();
@@ -27,6 +27,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
       showProgressBar = true;
     });
     DiaryData diaryData = DiaryData(WEIGHT, { "date": widget.selectedDate, "weight": weightController.text});
+    diaryData.userId = widget.userId;
     Provider.of<UserService>(context, listen: false)
         .saveDiaryData(diaryData)
         .then((doc) => print(doc));

@@ -21,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var passwordController = TextEditingController();
   var rePasswordController = TextEditingController();
   final _form = GlobalKey<FormState>();
-
+  String userProfilePicUrl = "";
   String uuid;
   AsiriUser userDetails;
 
@@ -36,6 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       nameController.text = credentials.user.displayName;
       emailController.text = credentials.user.email;
+      userProfilePicUrl = credentials.user.photoURL;
       uuid = credentials.user.uid;
     });
   }
@@ -64,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return null;
     }
     userDetails = AsiriUser(uuid, nameController.text, emailController.text,
-        telephoneController.text, "");
+        telephoneController.text, "", userProfilePicUrl);
     Provider.of<UserService>(context, listen: false)
         .saveUser(userDetails: userDetails)
         .then((doc) {

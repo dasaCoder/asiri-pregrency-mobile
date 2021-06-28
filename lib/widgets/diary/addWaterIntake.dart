@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 
 class AddWaterIntake extends StatefulWidget {
   final String selectedDate;
+  final String userId;
 
-  const AddWaterIntake({Key key, this.selectedDate}) : super(key: key);
+  const AddWaterIntake({Key key, this.selectedDate, this.userId}) : super(key: key);
   @override
   _AddWaterIntakeState createState() => _AddWaterIntakeState();
 }
@@ -23,6 +24,7 @@ class _AddWaterIntakeState extends State<AddWaterIntake> {
     });
     DiaryData diaryData = DiaryData(WATER_INTAKE,
         {"date": widget.selectedDate, "waterIntakeCount": _waterIntakeCount});
+    diaryData.userId = widget.userId;
     Provider.of<UserService>(context, listen: false)
         .saveDiaryData(diaryData)
         .then((doc) => print(doc));

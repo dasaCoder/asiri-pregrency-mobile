@@ -12,6 +12,8 @@ class AuthenticationService {
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
+    await FacebookAuth.instance.logOut();
+    await GoogleSignIn().signOut();
   }
 
   Future<bool> signIn({String email, String password}) async {

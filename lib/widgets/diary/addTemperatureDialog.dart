@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 
 class AddTemperatureDialog extends StatefulWidget {
   final String selectedDate;
+  final String userId;
 
-  const AddTemperatureDialog({Key key, this.selectedDate}) : super(key: key);
+  const AddTemperatureDialog({Key key, this.selectedDate, this.userId}) : super(key: key);
 
   @override
   _AddTemperatureDialogState createState() => _AddTemperatureDialogState();
@@ -27,6 +28,7 @@ class _AddTemperatureDialogState extends State<AddTemperatureDialog> {
       showProgressBar = true;
     });
     DiaryData diaryData = DiaryData(TEMPERATURE, { "date": widget.selectedDate, "temperature": _currentSliderValue});
+    diaryData.userId = widget.userId;
     Provider.of<UserService>(context, listen: false)
         .saveDiaryData(diaryData)
         .then((doc) => print(doc));
@@ -51,7 +53,7 @@ class _AddTemperatureDialogState extends State<AddTemperatureDialog> {
               alignment: AlignmentDirectional.topStart,
               child: Container(
                 child: Text(
-                  Languages.of(context).addWeightTitle,
+                  Languages.of(context).diaryTemperature,
                   style: TextStyle(
                     fontSize: 20,
                     color: Color.fromRGBO(60, 180, 242, 1),
