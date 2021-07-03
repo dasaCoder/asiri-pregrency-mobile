@@ -17,7 +17,6 @@ class LoginScreen extends StatelessWidget {
     Provider.of<AuthenticationService>(context, listen: false)
         .signIn(email: email, password: password)
         .then((result) {
-      print(result);
       if (result) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (BuildContext context) => HomeScreen()));

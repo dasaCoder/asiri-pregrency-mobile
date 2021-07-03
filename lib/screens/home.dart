@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
+import 'package:mother_and_baby/screens/Login.dart';
 import 'package:mother_and_baby/screens/community/chatPage.dart';
 import 'package:mother_and_baby/screens/community/communityPage.dart';
 import 'package:mother_and_baby/screens/diary.dart';
@@ -32,12 +33,23 @@ class _HomeScreenState extends State<HomeScreen> {
     if (firebaseUser == null) {
       // TODO - handle error
     }
-    Provider.of<UserService>(context, listen: false).getUser(firebaseUser.uid).then((userData) {
-      setState(() {
-        asiriUser = userData;
-        currentMonth = calculateCurrentMonth(DateTime.fromMillisecondsSinceEpoch(asiriUser.pregnantStartDate));
+    try {
+      Provider.of<UserService>(context, listen: false).getUser(firebaseUser.uid).then((userData) {
+        if(userData == null) {
+          final snackBar = SnackBar(content: Text('Something occurred! please log again'), backgroundColor: Colors.red,);
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => LoginScreen()));
+        }
+        setState(() {
+          asiriUser = userData;
+          currentMonth = calculateCurrentMonth(DateTime.fromMillisecondsSinceEpoch(asiriUser.pregnantStartDate));
+        });
       });
-    });
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 
   int calculateCurrentMonth(DateTime startDate) {

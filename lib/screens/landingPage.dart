@@ -48,20 +48,25 @@ class _LandingPageState extends State<LandingPage> {
     }
     return caption;
   }
-  AsiriUser updatableAsiriUser;
+  AsiriUser userDatails;
   @override
   void initState() {
-    if(widget.asiriUser != null) {
-      Provider.of<UserService>(context, listen: false).getUser(widget.asiriUser.userId).then((userData) {
-        setState(() {
-          updatableAsiriUser = userData;
-        });
-      });
-    }
+
   }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+
+    if(widget.asiriUser !=null) {
+      Provider.of<UserService>(context, listen: false).getUser(widget.asiriUser.userId).then((user)
+      {
+        setState((){
+          userDatails = user;
+        });
+      });
+    }
+
     return Container(
       constraints: BoxConstraints(minHeight: screenSize.height),
       decoration: BoxDecoration(
@@ -120,6 +125,7 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   height: 5,
                 ),
+
                 Text(
                   "You are in the ${getMonthCaption()} month of your pregnancy",
                   style: TextStyle(color: Colors.white, fontSize: 22),
@@ -128,8 +134,8 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   height: 25,
                 ),
-                if(widget.asiriUser != null) Text(
-                  "Your due date is ${DateFormat("MMMM d, yyyy").format(DateTime.fromMillisecondsSinceEpoch(widget.asiriUser.dueDate))}",
+                if(userDatails != null) Text(
+                  "Your due date is ${DateFormat("MMMM d, yyyy").format(DateTime.fromMillisecondsSinceEpoch(userDatails.dueDate))}",
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ],
@@ -144,12 +150,12 @@ class _LandingPageState extends State<LandingPage> {
                 "assets/images/welcome/baby.png",
                 height: 50,
               ),
-              title: Text("${updatableAsiriUser != null ? updatableAsiriUser.kickCount : "0"} kicks ❤"),
+              title: Text("${userDatails != null ? userDatails.kickCount : "0"} kicks ❤"),
               subtitle: Text("Go to kick counter.."),
               trailing: Icon(Icons.arrow_forward_ios_sharp),
               onTap: () => {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => KickCounter(asiriUser: widget.asiriUser,)))
+                    builder: (BuildContext context) => KickCounter(asiriUser: userDatails,)))
               },
             ),
           ),

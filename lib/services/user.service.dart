@@ -32,14 +32,22 @@ class UserService {
 
   Future<AsiriUser> getUser(String uuid) async {
     // ignore: non_constant_identifier_names
-    QuerySnapshot<Map<String, dynamic>> snapshot = await _firestoreInstance
-        .collection(DBNAME)
-        .where("userId", isEqualTo: uuid)
-        .limit(1)
-        .get();
-    var user = snapshot.docs.first.data();
-    AsiriUser asiriUser = AsiriUser.fromJson(user);
-    return asiriUser;
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await _firestoreInstance
+          .collection(DBNAME)
+          .where("userId", isEqualTo: uuid)
+          .limit(1)
+          .get();
+      if(snapshot.docs.length < 1) {
+        return null;
+      }
+      var user = snapshot.docs.first.data();
+      AsiriUser asiriUser = AsiriUser.fromJson(user);
+      return asiriUser;
+    } on Exception catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   DateTime calculateAndSaveDueDate(

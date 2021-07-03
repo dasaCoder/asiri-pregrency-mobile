@@ -8,7 +8,7 @@ class AsiriUser {
   String calculatedMethod;
   int pregnantStartDate;
   int dueDate;
-  int kickCount;
+  int kickCount = 0;
 
   AsiriUser(this.userId, this.name, this.email, this.telephone, this.address, this.imageUrl,);
 

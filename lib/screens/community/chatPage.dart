@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
@@ -17,6 +19,12 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   var txtController = TextEditingController();
   var _form = GlobalKey<FormState>();
+  final _controller = ScrollController();
+
+
+  @override
+  void initState() {
+  }
 
   void sendMessage() {
     final isValid = _form.currentState.validate();
@@ -24,8 +32,8 @@ class _ChatPageState extends State<ChatPage> {
       return;
     }
 
-    Message message = Message(
-        txtController.text, widget.asiriUser.userId, widget.asiriUser.name, DateTime.now().millisecondsSinceEpoch);
+    Message message = Message(txtController.text, widget.asiriUser.userId,
+        widget.asiriUser.name, DateTime.now().millisecondsSinceEpoch);
     Provider.of<UserService>(context, listen: false).saveMessage(message);
 
     setState(() {
@@ -36,6 +44,10 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    if (_controller.hasClients)
+      Timer(Duration(milliseconds: 500), () {
+        _controller.jumpTo(_controller.position.maxScrollExtent);
+      });
 
     return Scaffold(
       body: Container(
@@ -72,39 +84,46 @@ class _ChatPageState extends State<ChatPage> {
             ),
             Expanded(
               flex: 1,
-              child: SingleChildScrollView(
-                child: Container(
-                  margin: EdgeInsets.only(left: 15, right: 15),
-                  child: StreamBuilder(
-                    stream: Provider.of<UserService>(context, listen: false)
-                        .getMessages(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (!snapshot.hasData) {
-                        return Container(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else {
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: snapshot.data.docs.length,
-                            itemBuilder: (context, index) {
-                              Message message = Message.fromJson(
-                                  snapshot.data.docs[index].data());
-                              return Container(
-                                child: Column(
-                                  children: [
-                                    message.userId == widget.asiriUser.userId
-                                        ? buildOwnMessage(screenSize, message)
-                                        : buildMessageFromSomeone(
-                                            screenSize, message),
-                                  ],
-                                ),
-                              );
-                            });
-                      }
-                    },
-                  ),
+              child: Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: StreamBuilder(
+                  stream: Provider.of<UserService>(context, listen: false)
+                      .getMessages(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return Container(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return SingleChildScrollView(
+                        physics: ScrollPhysics(),
+                        child: Column(
+                          children: [
+                            ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                controller: _controller,
+                                shrinkWrap: true,
+                                itemCount: snapshot.data.docs.length,
+                                itemBuilder: (context, index) {
+                                  Message message = Message.fromJson(
+                                      snapshot.data.docs[index].data());
+                                  return Container(
+                                    child: Column(
+                                      children: [
+                                        message.userId == widget.asiriUser.userId
+                                            ? buildOwnMessage(screenSize, message)
+                                            : buildMessageFromSomeone(
+                                                screenSize, message),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ],
+                        ),
+                      );
+                    }
+                  },
                 ),
               ),
             ),
