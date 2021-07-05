@@ -7,6 +7,7 @@ import 'package:mother_and_baby/screens/home.dart';
 import 'package:mother_and_baby/screens/midWifePage.dart';
 import 'package:mother_and_baby/screens/excersicePage.dart';
 import 'package:mother_and_baby/screens/reminders/reminders.dart';
+import 'package:mother_and_baby/screens/servicesInfo.dart';
 import 'package:mother_and_baby/screens/settings.dart';
 import 'package:mother_and_baby/screens/specialistPage.dart';
 import 'package:mother_and_baby/services/user.service.dart';
@@ -40,6 +41,14 @@ class _NavDrawerState extends State<NavDrawer> {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => HomeScreen(
                     selectedIndex: 0,
+                  )));
+        }
+        break;
+      case "COMMUNITY":
+        {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => HomeScreen(
+                    selectedIndex: 2,
                   )));
         }
         break;
@@ -83,6 +92,12 @@ class _NavDrawerState extends State<NavDrawer> {
         {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => ExercisePage()));
+        }
+        break;
+      case "CONTACT_US":
+        {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => ServicesInfo()));
         }
         break;
       default:
@@ -149,7 +164,8 @@ class _NavDrawerState extends State<NavDrawer> {
                       icon: Icon(Icons.settings),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => SettingsScreen()));
+                            builder: (BuildContext context) =>
+                                SettingsScreen()));
                       },
                     ),
                   )
@@ -199,6 +215,7 @@ class _NavDrawerState extends State<NavDrawer> {
               DrawerListItem(
                 title: Languages.of(context).community,
                 imagePath: "community.png",
+                onClicked: () => navigateToPage(context, "COMMUNITY"),
               ),
               DrawerListItem(
                 title: Languages.of(context).consultant,
@@ -218,6 +235,7 @@ class _NavDrawerState extends State<NavDrawer> {
               DrawerListItem(
                 title: Languages.of(context).hospital,
                 imagePath: "hospital.png",
+                onClicked: () => navigateToPage(context, "CONTACT_US"),
               ),
             ],
           ),

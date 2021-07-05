@@ -170,7 +170,7 @@ class UserService {
   Stream<QuerySnapshot<dynamic>> getMessages() {
     return _firestoreInstance.collection(MESSAGE_DB)
         .orderBy("createdAt")
-        .limit(20).snapshots();
+        .limit(100).snapshots();
   }
 }
 

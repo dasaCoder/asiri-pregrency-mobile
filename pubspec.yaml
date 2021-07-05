@@ -47,6 +47,7 @@ dependencies:
   carousel_slider: ^3.0.0
   flutter_facebook_auth: ^3.0.0
   google_sign_in: ^5.0.4
+  url_launcher: ^6.0.9
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
     - assets/images/login/
     - assets/images/bottomDrawer/
     - assets/images/reminders/
+    - assets/images/months/first/
     - assets/fonts/
     - assets/music/
 

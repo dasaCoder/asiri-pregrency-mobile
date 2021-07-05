@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
 import 'package:mother_and_baby/screens/kickCounter.dart';
+import 'package:mother_and_baby/screens/months/firstMonth.dart';
+import 'package:mother_and_baby/screens/servicesInfo.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:mother_and_baby/widgets/videoPreview.dart';
 import 'package:intl/intl.dart';
@@ -47,6 +49,18 @@ class _LandingPageState extends State<LandingPage> {
         break;
     }
     return caption;
+  }
+
+  void goToMonthDescription() {
+    switch(widget.currentMonth) {
+      case 1:
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => FirstMonthScreen()));
+        break;
+      default:
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => FirstMonthScreen()));
+    }
   }
   AsiriUser userDatails;
   @override
@@ -171,6 +185,7 @@ class _LandingPageState extends State<LandingPage> {
               subtitle: Text(
                   "What you should know about ${getMonthCaption()} month of pregnancy.."),
               trailing: Icon(Icons.arrow_forward_ios_sharp),
+              onTap: () => goToMonthDescription(),
             ),
           ),
           Divider(),
@@ -183,6 +198,10 @@ class _LandingPageState extends State<LandingPage> {
               title: Text("Hospital Services 🏥"),
               subtitle: Text("Emergency contact numbers"),
               trailing: Icon(Icons.arrow_forward_ios_sharp),
+              onTap: () => {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => ServicesInfo()))
+              },
             ),
           ),
           Divider(),
