@@ -7,13 +7,16 @@ import 'package:intl/intl.dart';
 import 'addReminders.dart';
 
 class AddDoctorReminder extends StatefulWidget {
+  final String userId;
+
+  const AddDoctorReminder({Key key, this.userId}) : super(key: key);
   @override
   _AddDoctorReminderState createState() => _AddDoctorReminderState();
 }
 
 class _AddDoctorReminderState extends State<AddDoctorReminder> {
   var nameController = TextEditingController();
-  var medStrengthController = TextEditingController();
+  var locationController = TextEditingController();
   var startTimeController = TextEditingController();
   var dateController = TextEditingController();
   TimeOfDay selectedTime;
@@ -31,9 +34,12 @@ class _AddDoctorReminderState extends State<AddDoctorReminder> {
       showProgressBar = true;
     });
 
+    String description =
+        "You have meeting with ${nameController.text} at ${selectedTime.hour}:"
+        "${selectedTime.minute} at the ${locationController.text}";
     Reminder reminder = Reminder(
-        nameController.text,
-        medStrengthController.text,
+        "Doctor Appointment : ${nameController.text}",
+        description,
         selectedTime.hour,
         selectedTime.minute,
         "once",
@@ -41,7 +47,8 @@ class _AddDoctorReminderState extends State<AddDoctorReminder> {
         ReminderType.DOCTOR,
         selectedDate.year,
         selectedDate.month,
-        selectedDate.day);
+        selectedDate.day,
+        widget.userId);
 
     var idTmp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
@@ -180,7 +187,7 @@ class _AddDoctorReminderState extends State<AddDoctorReminder> {
                                     return null;
                                 },
                                 keyboardType: TextInputType.text,
-                                controller: medStrengthController,
+                                controller: locationController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   contentPadding:

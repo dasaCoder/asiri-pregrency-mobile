@@ -1,20 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mother_and_baby/services/notificationHelper.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:provider/provider.dart';
 
 class ReminderStreamWidget extends StatelessWidget {
   final ReminderType reminderType;
+  final String userId;
 
   const ReminderStreamWidget({
-    Key key, this.reminderType,
+    Key key, this.reminderType, this.userId,
   }) : super(key: key);
+
+  void removeReminder(BuildContext context, DocumentSnapshot ds) {
+    for(int x=0; x< ds['reminderIds'].length; x++ ) {
+      deleteNotification(ds['reminderIds'][x]);
+    }
+    Provider.of<UserService>(context, listen: false)
+        .deleteReminder(ds.id);
+  }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: Provider.of<UserService>(context)
-            .getRemindersBuType(reminderType),
+            .getRemindersBuType(userId, reminderType),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot> snapshot) {
           print(snapshot);
@@ -46,7 +56,7 @@ class ReminderStreamWidget extends StatelessWidget {
                         trailing: InkWell(
                           child: Icon(Icons.delete_outline),
                           onTap: () {
-                            //deleteReminder(context, ds);
+                            removeReminder(context, ds);
                           },
                         ),
                         onTap: () => {},

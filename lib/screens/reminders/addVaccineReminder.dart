@@ -7,13 +7,16 @@ import 'package:intl/intl.dart';
 import 'addReminders.dart';
 
 class AddVaccineReminder extends StatefulWidget {
+  final String userId;
+
+  const AddVaccineReminder({Key key, this.userId}) : super(key: key);
   @override
   _AddVaccineReminderState createState() => _AddVaccineReminderState();
 }
 
 class _AddVaccineReminderState extends State<AddVaccineReminder> {
   var nameController = TextEditingController();
-  var medStrengthController = TextEditingController();
+  var locationController = TextEditingController();
   var startTimeController = TextEditingController();
   var dateController = TextEditingController();
   TimeOfDay selectedTime;
@@ -31,9 +34,11 @@ class _AddVaccineReminderState extends State<AddVaccineReminder> {
       showProgressBar = true;
     });
 
+    String description =
+        "You have to take ${nameController.text} at ${selectedTime.hour}:${selectedTime.minute} at the ${locationController.text}";
     Reminder reminder = Reminder(
-        nameController.text,
-        medStrengthController.text,
+        "Vaccine Reminder : ${nameController.text}",
+        description,
         selectedTime.hour,
         selectedTime.minute,
         "once",
@@ -41,7 +46,8 @@ class _AddVaccineReminderState extends State<AddVaccineReminder> {
         ReminderType.VACCINE,
         selectedDate.year,
         selectedDate.month,
-        selectedDate.day);
+        selectedDate.day,
+        widget.userId);
 
     var idTmp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
@@ -180,7 +186,7 @@ class _AddVaccineReminderState extends State<AddVaccineReminder> {
                                     return null;
                                 },
                                 keyboardType: TextInputType.text,
-                                controller: medStrengthController,
+                                controller: locationController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   contentPadding:
@@ -267,7 +273,8 @@ class _AddVaccineReminderState extends State<AddVaccineReminder> {
                                     initialTime: TimeOfDay.now(),
                                     context: context,
                                   );
-                                  startTimeController.text = selectedTime.hour.toString() +
+                                  startTimeController.text = selectedTime.hour
+                                          .toString() +
                                       ":" +
                                       (selectedTime.minute < 10 ? "0" : "") +
                                       selectedTime.minute.toString();

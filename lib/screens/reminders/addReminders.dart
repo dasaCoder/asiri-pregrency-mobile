@@ -7,6 +7,9 @@ import 'package:mother_and_baby/services/notificationHelper.dart';
 enum MedicineType { INJECTION, PILLS, INHALER, DROPS, OTHER }
 
 class AddReminderScreen extends StatefulWidget {
+  final String userId;
+
+  const AddReminderScreen({Key key, this.userId}) : super(key: key);
   @override
   _AddReminderScreenState createState() => _AddReminderScreenState();
 }
@@ -45,7 +48,7 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
         " of " +
         nameController.text;
     Reminder reminder = Reminder(
-        nameController.text,
+        "Medicine Reminder : ${nameController.text}",
         description,
         selectedTime.hour,
         selectedTime.minute,
@@ -54,7 +57,7 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
         ReminderType.MEDICINE,
         0,
         0,
-        0);
+        0, widget.userId);
 
     var idTmp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 

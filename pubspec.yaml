@@ -76,6 +76,7 @@ flutter:
     - assets/images/login/
     - assets/images/bottomDrawer/
     - assets/images/reminders/
+    - assets/images/schedule/
     - assets/images/months/first/
     - assets/fonts/
     - assets/music/

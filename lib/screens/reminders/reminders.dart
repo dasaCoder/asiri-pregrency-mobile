@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/screens/reminders/addDoctorReminder.dart';
 import 'package:mother_and_baby/screens/reminders/addVaccineReminder.dart';
@@ -19,6 +20,12 @@ class ReminderScreen extends StatefulWidget {
 }
 
 class _ReminderScreenState extends State<ReminderScreen> {
+  String userId;
+
+  @override
+  void initState() {
+  }
+
   loadReminders() {
     getAllNotifications().then((value) => print(value.length));
   }
@@ -46,19 +53,21 @@ class _ReminderScreenState extends State<ReminderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    userId = Provider.of<User>(context).uid;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           shape: StadiumBorder(),
           onPressed: () {
             if(widget.reminderType == ReminderType.MEDICINE) {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => AddReminderScreen()));
+                  builder: (BuildContext context) => AddReminderScreen(userId: userId,)));
             } else if(widget.reminderType == ReminderType.DOCTOR) {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => AddDoctorReminder()));
+                  builder: (BuildContext context) => AddDoctorReminder(userId: userId,)));
             } else if(widget.reminderType == ReminderType.VACCINE) {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => AddVaccineReminder()));
+                  builder: (BuildContext context) => AddVaccineReminder(userId: userId,)));
             } else {
 
             }
@@ -70,7 +79,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
             size: 20.0,
           )),
       drawer: NavDrawer(),
-      body: Container(
+      body: userId != null ? Container(
         constraints:
             BoxConstraints(minHeight: MediaQuery.of(context).size.height),
         decoration: BoxDecoration(
@@ -119,13 +128,13 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 Container(
                   margin: mainContainerMargin,
                   child:
-                      ReminderStreamWidget(reminderType: widget.reminderType),
+                      ReminderStreamWidget(reminderType: widget.reminderType, userId: userId,),
                 )
               ],
             ),
           );
         }),
-      ),
+      ) : CircularProgressIndicator(),
     );
   }
 }

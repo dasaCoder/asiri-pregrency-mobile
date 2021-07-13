@@ -24,6 +24,8 @@ class LoginScreen extends StatelessWidget {
         final snackBar = SnackBar(content: Text('User name or password is wrong! Please try again'), backgroundColor: Colors.red,);
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
+    }).onError((error, stackTrace) {
+      print(error.toString());
     });
   }
 

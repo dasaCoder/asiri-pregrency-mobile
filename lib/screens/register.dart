@@ -56,6 +56,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           final snackBar = SnackBar(content: Text('Something occurred! please try again'), backgroundColor: Colors.red,);
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
+    }).catchError((e) {
+      String error = Provider.of<AuthenticationService>(context, listen: false).getMessageFromErrorCode(e);
+      final snackBar = SnackBar(content: Text(error), backgroundColor: Colors.red,);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
   }
 

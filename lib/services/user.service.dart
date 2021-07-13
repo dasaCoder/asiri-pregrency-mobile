@@ -130,9 +130,10 @@ class UserService {
   }
 
   /// Function to retrieve reminders on given type
-  Stream<QuerySnapshot<dynamic>> getRemindersBuType(ReminderType reminderType) {
+  Stream<QuerySnapshot<dynamic>> getRemindersBuType(String userId, ReminderType reminderType) {
     return _firestoreInstance
         .collection("reminder_data")
+        .where("userId", isEqualTo: userId)
         .where("reminderType", isEqualTo: reminderType.toString())
         .snapshots();
   }
@@ -219,6 +220,7 @@ class Reminder {
   List<int> reminderIds;
   final MedicineType medicineType;
   final ReminderType reminderType;
+  final String userId;
   int startTimeHour;
   int startTimeMinute;
   int year;
@@ -235,7 +237,7 @@ class Reminder {
       this.reminderType,
       this.year,
       this.month,
-      this.date);
+      this.date, this.userId);
 
   Map<String, dynamic> toJson() => {
         'title': title,
@@ -245,6 +247,7 @@ class Reminder {
         'frequency': frequency,
         'reminderIds': reminderIds.toList(),
         'medicineType': medicineType.toString(),
+        'userId': userId,
         'reminderType': reminderType.toString()
       };
 }
