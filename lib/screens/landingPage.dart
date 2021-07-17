@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
 import 'package:mother_and_baby/screens/kickCounter.dart';
+import 'package:mother_and_baby/screens/months/fifthMonth.dart';
 import 'package:mother_and_baby/screens/months/firstMonth.dart';
+import 'package:mother_and_baby/screens/months/forthMonth.dart';
+import 'package:mother_and_baby/screens/months/secondMonth.dart';
+import 'package:mother_and_baby/screens/months/seventhMonth.dart';
+import 'package:mother_and_baby/screens/months/sixthMonth.dart';
+import 'package:mother_and_baby/screens/months/thirdMonth.dart';
 import 'package:mother_and_baby/screens/servicesInfo.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:mother_and_baby/widgets/videoPreview.dart';
@@ -52,30 +58,55 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   void goToMonthDescription() {
-    switch(widget.currentMonth) {
+    switch (7) {
+      //widget.currentMonth
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
             builder: (BuildContext context) => FirstMonthScreen()));
+        break;
+      case 2:
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => SecondMonth()));
+        break;
+      case 3:
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => ThirdMonth()));
+        break;
+      case 4:
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => FourthMonth()));
+        break;
+        case 5:
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => FifthMonth()));
+        break;
+        case 6:
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => SixthMonth()));
+        break;
+        case 7:
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => SeventhMonth()));
         break;
       default:
         Navigator.of(context).push(MaterialPageRoute(
             builder: (BuildContext context) => FirstMonthScreen()));
     }
   }
+
   AsiriUser userDatails;
   @override
-  void initState() {
-
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    if(widget.asiriUser !=null) {
-      Provider.of<UserService>(context, listen: false).getUser(widget.asiriUser.userId).then((user)
-      {
-        setState((){
+    if (widget.asiriUser != null) {
+      Provider.of<UserService>(context, listen: false)
+          .getUser(widget.asiriUser.userId)
+          .then((user) {
+        setState(() {
           userDatails = user;
         });
       });
@@ -139,7 +170,6 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   height: 5,
                 ),
-
                 Text(
                   "You are in the ${getMonthCaption()} month of your pregnancy",
                   style: TextStyle(color: Colors.white, fontSize: 22),
@@ -148,10 +178,11 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   height: 25,
                 ),
-                if(userDatails != null) Text(
-                  "Your due date is ${DateFormat("MMMM d, yyyy").format(DateTime.fromMillisecondsSinceEpoch(userDatails.dueDate))}",
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
+                if (userDatails != null)
+                  Text(
+                    "Your due date is ${DateFormat("MMMM d, yyyy").format(DateTime.fromMillisecondsSinceEpoch(userDatails.dueDate))}",
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
               ],
             ),
           ),
@@ -164,12 +195,15 @@ class _LandingPageState extends State<LandingPage> {
                 "assets/images/welcome/baby.png",
                 height: 50,
               ),
-              title: Text("${userDatails != null ? userDatails.kickCount : "0"} kicks ❤"),
+              title: Text(
+                  "${userDatails != null ? userDatails.kickCount : "0"} kicks ❤"),
               subtitle: Text("Go to kick counter.."),
               trailing: Icon(Icons.arrow_forward_ios_sharp),
               onTap: () => {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => KickCounter(asiriUser: userDatails,)))
+                    builder: (BuildContext context) => KickCounter(
+                          asiriUser: userDatails,
+                        )))
               },
             ),
           ),

@@ -42,54 +42,92 @@ class _KickCounterState extends State<KickCounter> {
                 fit: BoxFit.cover)),
         child: SingleChildScrollView(
           child: Container(
-            height: screenSize.height,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  child: Text(
-                    "${kickCount.toString()}",
-                    style: new TextStyle(fontSize: 60, color: Colors.purple),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          // Scaffold.of(context).openDrawer();
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(right: 15),
+                          width: 30,
+                          child: Icon(
+                            Icons.arrow_back_rounded,
+                            size: 25,
+                            color: Color.fromRGBO(161, 129, 239, 1),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Kick Counter",
+                        style: new TextStyle(
+                            fontSize: 20,
+                            color: Color.fromRGBO(161, 129, 239, 1)),
+                      ),
+                    ],
                   ),
                 ),
-                Text(
-                  "Kicks 😍😍",
-                  style: new TextStyle(fontSize: 18, color: Colors.purple),
-                ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(left: 100, right: 100),
-                  // decoration: BoxDecoration(color: Colors.red),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(60, 180, 242, 1),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
+                  height: screenSize.height*0.8,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Text(
+                          "${kickCount.toString()}",
+                          style: new TextStyle(fontSize: 60, color: Colors.purple),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        kickCount++;
-                      });
-                      Provider.of<UserService>(context, listen: false)
-                          .incrementKickCount(widget.asiriUser.userId);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                            padding: EdgeInsets.only(top: 5, bottom: 5),
-                            width: 50,
-                            child: Icon(
-                              Icons.add,
-                              size: 30,
-                            )),
-                      ],
-                    ),
+                      Text(
+                        "Kicks 😍😍",
+                        style: new TextStyle(fontSize: 18, color: Colors.purple),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(left: 100, right: 100),
+                        // decoration: BoxDecoration(color: Colors.red),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color.fromRGBO(60, 180, 242, 1),
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0),
+                            ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              kickCount++;
+                            });
+                            Provider.of<UserService>(context, listen: false)
+                                .incrementKickCount(widget.asiriUser.userId);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                  padding: EdgeInsets.only(top: 5, bottom: 5),
+                                  width: 50,
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 30,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

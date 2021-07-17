@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/widgets/months/factListItem.dart';
+import 'package:mother_and_baby/widgets/months/monthVideoPreview.dart';
 
-import '../videoPlayer.dart';
+class SecondMonth extends StatelessWidget {
 
-class FirstMonthScreen extends StatelessWidget {
+  final String url = "";
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-// 2d317f - dark
-    // 44b4f2
+
     var lightBlue = Color.fromRGBO(59, 186, 234, 1.0);
     var darkBlue = Color.fromRGBO(45, 49, 127, 1.0);
     return Scaffold(
@@ -51,142 +51,96 @@ class FirstMonthScreen extends StatelessWidget {
 
                     Center(
                       child: Text(
-                        "First Month",
+                        "Second Month",
                         style: TextStyle(
                             fontSize: 24, color: Color.fromRGBO(255, 61, 227, 1)),
                       ),
                     ),
                   ],),
 
-
-                  // Padding(
-                  //   padding: EdgeInsets.only(top: 10, bottom: 0),
-                  //   child: Text(
-                  //     "You are 1 month Pregnant!",
-                  //     style: TextStyle(fontSize: 18, color: lightBlue),
-                  //   ),
-                  // ),
+                  Container(
+                    padding: EdgeInsets.only(
+                      top: 10,
+                    ),
+                    child: Text(
+                      "    The physical and mental changes seen in the second month are very similar to "
+                          "the changes seen in the first month. In addition, it is important to participate "
+                          "in the monthly medical consultations. It is imperative to do so until the end of the second trimester. "
+                          "There you will be subjected to a number of tests."
+                          "For example, blood and urine tests.",
+                      style: TextStyle(color: darkBlue, fontSize: 16),
+                    ),
+                  ),
 
                   Container(
                     padding: EdgeInsets.only(
                       top: 10,
                     ),
                     child: Text(
-                      "    The first month of the pregnancy starts after about three "
-                      "weeks of your last menstruation. Generally you can get to know whether"
-                      " you are pregnant or not, after about five to six weeks. During this time, your "
-                      "physique and mental conditions start to change.",
+                          "    Bleeding in the vagina is one of the common symptoms during this month."
+                          "The features seen in this month are very similar to the changes seen in the first month."
+                          "But this period includes your first medical clinic and tests.",
                       style: TextStyle(color: darkBlue, fontSize: 16),
                     ),
                   ),
 
                   /// video preview
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(248, 114, 224, 1.0)),
-                    margin: EdgeInsets.only(top: 15, bottom: 15),
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          child: Image.asset(
-                            "assets/images/months/first/lady.png",
-                            height: 180,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  MonthVideoPreview(url: url),
 
                   Container(
                     child: Column(
                       children: [
                         Container(
                           child: Text(
-                            "External changes during the 1st month",
+                            "External changes during the 2nd month",
                             style: TextStyle(fontSize: 18, color: lightBlue),
                           ),
                         ),
                         FactListItem(
                           text:
-                              "Minor bleeding may occur with the onset of pregnancy.",
+                          "As mentioned earlier, these changes are very similar to those of the first month. "
+                              "These include fatigue, nausea, dizziness, the need for frequent urination, and changes in appetite.",
                         ),
                         FactListItem(
                           text:
-                              "At the same time a hormone called Early Implantation Factor (EPF) is secreted by the body.",
+                          "Also, if you use alcohol and drugs, your appetite will begin to drop."
+                              "This is a very important and good thing. Because, some of these toxins can harm the developing baby in the womb."
+                              "(Actually, it's very positive because mothers in our country do not use such toxins.)",
                         ),
                         FactListItem(
                           text:
-                              "This hormone prevents your body from rejecting the Fetus.",
+                          "In addition, you will see a noticeable change in the size of your breasts and nipples.",
                         ),
                         FactListItem(
                           text:
-                              "At the same time, a hormone called HCG is secreted throughout the first three months.",
+                          "Hormonal changes can cause a white discharge to come out of your vagina.",
                         ),
+                        FactListItem(
+                          text:
+                          "The softening of your gums takes place during this time. It is very important to pay more attention to dental health.",
+                        ),
+                        FactListItem(
+                          text:
+                          "During this time, your ovaries produce a hormone called progesterone.",
+                        ),
+                        FactListItem(
+                          text:
+                          "It also increases the amount of blood circulating. It is important for the development of the child.",
+                        ),
+                        FactListItem(
+                          text:
+                          "The baby moves slowly in the womb. But that is not enough for you to feel.",
+                        ),
+                        FactListItem(
+                          text:
+                          "During this time, take all measures to prevent possible accidents.",
+                        ),
+                        FactListItem(
+                          text:
+                          "In addition, get more healthy sleep. Also get enough exercise.",
+                        ),
+
                       ],
-                    ),
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.only(top: 15, bottom: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Additionally,",
-                          style: TextStyle(fontSize: 18, color: darkBlue),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "fatigue",
-                                style: TextStyle(fontSize: 16, color: darkBlue),
-                              ),
-                              Text(
-                                "frequent urination,",
-                                style: TextStyle(fontSize: 16, color: darkBlue),
-                              ),
-                              Text(
-                                "and enlargement of the breasts.",
-                                style: TextStyle(fontSize: 16, color: darkBlue),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
-                      "    Abnormal cravings for certain foods also occur in the early "
-                      "stages of pregnancy. Sometimes you may even feel a headache "
-                      "due to the increase in these hormones.",
-                      style: TextStyle(fontSize: 16, color: lightBlue),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
-                      "    Don’t be afraid that not all of the features mentioned above "
-                      "were the same. Because not everyone shows these symptoms "
-                      "the same way.",
-                      style: TextStyle(fontSize: 16, color: lightBlue),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
-                      "For example, some mothers may not show symptoms such as nausea and vomiting during this period.",
-                      style: TextStyle(fontSize: 16, color: lightBlue),
                     ),
                   ),
 
@@ -194,7 +148,7 @@ class FirstMonthScreen extends StatelessWidget {
 
                   Container(
                     padding:
-                        EdgeInsets.only(top: 8, bottom: 8, left: 15, right: 15),
+                    EdgeInsets.only(top: 8, bottom: 8, left: 15, right: 15),
                     margin: EdgeInsets.only(top: 20, bottom: 15),
                     decoration: BoxDecoration(
                         color: Colors.green,
@@ -208,24 +162,22 @@ class FirstMonthScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
-                      "    The mental changes that take place in the first few months of "
-                      "pregnancy are extremely noticeable. Because, you are now a woman "
-                      "preparing for the most unique work in the world. When you think about it, "
-                      "you feel happy and at the same time you may feel a little nervous. When you "
-                      "think about the experience you had in the last delivery, the fear you "
-                      "have about the baby, the way you prepare for the future, the mental level "
-                      "will be more chaotic than before.",
+                      "    The mental changes seen during this period (first trimester) are very similar to the changes in the first month."
+                          "The changes in your mind with this new experience are pretty much normal."
+                          "If you have any doubts or fears, talk to a doctor or the midwife."
+                          "They will give you the advice you need.",
                       style: TextStyle(fontSize: 16, color: Colors.green),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 15.0),
                     child: Text(
-                      "    As your daily routine changes and your attractiveness decreases, "
-                      "stress increases and it can develop into depression.",
+                      "    When you think about the experience you had in the last delivery, the fear you have about the baby, the way you prepare for the future, the mental level will be more chaotic than before."
+                          "As your daily routine changes and your attractiveness decreases, stress increases and it can develop into depression.",
                       style: TextStyle(fontSize: 16, color: Colors.green),
                     ),
                   ),
+
 
                   Container(
                     padding: const EdgeInsets.only(top: 14.0),
@@ -268,13 +220,9 @@ class FirstMonthScreen extends StatelessWidget {
                                 height: 100,
                               ),
                               Text(
-                                "Frequent",
+                                "Frequent crying",
                                 style: TextStyle(fontSize: 10, color: darkBlue),
                               ),
-                              Text(
-                                "uncontrollable crying",
-                                style: TextStyle(fontSize: 10, color: darkBlue),
-                              )
                             ],
                           ),
                         ),
@@ -287,9 +235,9 @@ class FirstMonthScreen extends StatelessWidget {
                                 height: 100,
                               ),
                               Text(
-                                "Sleeping problems",
+                                "Sleep disturbance",
                                 style: TextStyle(fontSize: 10, color: darkBlue),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -314,7 +262,7 @@ class FirstMonthScreen extends StatelessWidget {
                                 style: TextStyle(fontSize: 10, color: darkBlue),
                               ),
                               Text(
-                                "irritability or irritability",
+                                "anger or irritability",
                                 style: TextStyle(fontSize: 10, color: darkBlue),
                               ),
                             ],
@@ -343,7 +291,7 @@ class FirstMonthScreen extends StatelessWidget {
                     padding: EdgeInsets.only(top: 20),
                     child: Text(
                       "Overall, most women lovingly accept the noble pregnancy. "
-                      "They make this period the happiest chapter of their lives.",
+                          "They make this period the happiest chapter of their lives.",
                       style: TextStyle(color: Colors.pink, fontSize: 15),
                       textAlign: TextAlign.center,
                     ),
@@ -357,3 +305,4 @@ class FirstMonthScreen extends StatelessWidget {
     );
   }
 }
+
