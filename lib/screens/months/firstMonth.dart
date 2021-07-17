@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/widgets/months/factListItem.dart';
+import 'package:mother_and_baby/widgets/months/monthSlider.dart';
 
 import '../videoPlayer.dart';
 
@@ -57,6 +58,8 @@ class FirstMonthScreen extends StatelessWidget {
                       ),
                     ),
                   ],),
+
+                  MonthSliderWidget(selectedMonth: 1,),
 
 
                   // Padding(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/widgets/months/factListItem.dart';
+import 'package:mother_and_baby/widgets/months/monthSlider.dart';
 import 'package:mother_and_baby/widgets/months/monthVideoPreview.dart';
 
 class ThirdMonth extends StatelessWidget {
-  final String url = "";
+  final String url = "https://firebasestorage.googleapis.com/v0/b/asiri-hospital-tour.appspot.com/o/videos%2F3rd_Month_Saantha.mp4?alt=media&token=48ea728d-8549-4160-a193-7771033c3060";
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -57,6 +58,8 @@ class ThirdMonth extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  MonthSliderWidget(selectedMonth: 3,),
 
                   Container(
                     padding: EdgeInsets.only(

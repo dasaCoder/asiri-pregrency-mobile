@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/widgets/months/monthItemList.dart';
+import 'package:mother_and_baby/widgets/months/monthSlider.dart';
 import 'package:mother_and_baby/widgets/months/monthVideoPreview.dart';
 import 'package:mother_and_baby/widgets/months/paragraph.dart';
 
 class SeventhMonth extends StatelessWidget {
-  final String url = "";
+  final String url = "https://firebasestorage.googleapis.com/v0/b/asiri-hospital-tour.appspot.com/o/videos%2F7th_Month_Maathota_1.mp4?alt=media&token=6a5d9811-7ac3-472f-9214-7c4d00dd348b";
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -58,6 +59,8 @@ class SeventhMonth extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  MonthSliderWidget(selectedMonth: 7,),
 
                   Paragraph(color: darkBlue, text: "  You are now in the seventh month of your pregnancy. As you gradually get close to achieving wonderful motherhood, during this month as in the "
                       "previous months, you as well as your baby will experience some special changes.",),

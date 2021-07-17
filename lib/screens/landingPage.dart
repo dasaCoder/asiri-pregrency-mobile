@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
 import 'package:mother_and_baby/screens/kickCounter.dart';
+import 'package:mother_and_baby/screens/months/eighthMonth.dart';
 import 'package:mother_and_baby/screens/months/fifthMonth.dart';
 import 'package:mother_and_baby/screens/months/firstMonth.dart';
 import 'package:mother_and_baby/screens/months/forthMonth.dart';
+import 'package:mother_and_baby/screens/months/ninthMonth.dart';
 import 'package:mother_and_baby/screens/months/secondMonth.dart';
 import 'package:mother_and_baby/screens/months/seventhMonth.dart';
 import 'package:mother_and_baby/screens/months/sixthMonth.dart';
@@ -58,8 +60,7 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   void goToMonthDescription() {
-    switch (7) {
-      //widget.currentMonth
+    switch (widget.currentMonth) {
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
             builder: (BuildContext context) => FirstMonthScreen()));
@@ -73,20 +74,28 @@ class _LandingPageState extends State<LandingPage> {
             MaterialPageRoute(builder: (BuildContext context) => ThirdMonth()));
         break;
       case 4:
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => FourthMonth()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => FourthMonth()));
         break;
-        case 5:
+      case 5:
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => FifthMonth()));
         break;
-        case 6:
+      case 6:
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => SixthMonth()));
         break;
-        case 7:
+      case 7:
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => SeventhMonth()));
+        break;
+      case 8:
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => EighthMonth()));
+        break;
+      case 9:
         Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => SeventhMonth()));
+            MaterialPageRoute(builder: (BuildContext context) => NinthMonth()));
         break;
       default:
         Navigator.of(context).push(MaterialPageRoute(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/widgets/months/monthItemList.dart';
+import 'package:mother_and_baby/widgets/months/monthSlider.dart';
 import 'package:mother_and_baby/widgets/months/monthVideoPreview.dart';
 import 'package:mother_and_baby/widgets/months/paragraph.dart';
 
 class SixthMonth extends StatelessWidget {
-  final String url = "";
+  final String url = "https://firebasestorage.googleapis.com/v0/b/asiri-hospital-tour.appspot.com/o/videos%2F6th_Month.mp4?alt=media&token=6a4e8489-ed4f-4186-b35d-8889867cf1b6";
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -58,6 +59,8 @@ class SixthMonth extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  MonthSliderWidget(selectedMonth: 6,),
 
                   Container(
                     padding: EdgeInsets.only(

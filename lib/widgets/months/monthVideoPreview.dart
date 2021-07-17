@@ -13,7 +13,7 @@ class MonthVideoPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Color.fromRGBO(248, 114, 224, 1.0)),
+          color: Color.fromRGBO(255, 164, 179, 1), borderRadius: BorderRadius.all(Radius.circular(20))),
       margin: EdgeInsets.only(top: 15, bottom: 15),
       padding: const EdgeInsets.all(20.0),
       child: Row(
