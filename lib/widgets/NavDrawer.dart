@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/main.dart';
+import 'package:mother_and_baby/models/asiriUser.dart';
 import 'package:mother_and_baby/screens/diary.dart';
 import 'package:mother_and_baby/screens/home.dart';
 import 'package:mother_and_baby/screens/midWifePage.dart';
@@ -12,6 +14,7 @@ import 'package:mother_and_baby/screens/settings.dart';
 import 'package:mother_and_baby/screens/specialistPage.dart';
 import 'package:mother_and_baby/services/user.service.dart';
 import 'package:mother_and_baby/widgets/drawerItem.dart';
+import 'package:provider/provider.dart';
 
 class NavDrawer extends StatefulWidget {
   @override
@@ -19,8 +22,14 @@ class NavDrawer extends StatefulWidget {
 }
 
 class _NavDrawerState extends State<NavDrawer> {
+  AsiriUser asiriUser;
+
+
   @override
   Widget build(BuildContext context) {
+    String uuid = Provider.of<User>(context).uid;
+    Provider.of<UserService>(context).getUser(uuid).then((value) => asiriUser = value);
+
     return oldDrawer(context);
   }
 
@@ -147,15 +156,15 @@ class _NavDrawerState extends State<NavDrawer> {
                   ],
                 ),
               ),
-              Stack(
+              asiriUser != null ? Stack(
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: Image.asset(
+                    child: asiriUser.imageUrl == "" ? Image.asset(
                       "assets/images/drawer/avatar.png",
                       height: 150,
                       width: 150,
-                    ),
+                    ) : Image.network(asiriUser.imageUrl, height: 150, width: 150,),
                   ),
                   Positioned(
                     right: 50,
@@ -170,7 +179,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   )
                 ],
-              ),
+              ) : SizedBox(child: Center(child: CircularProgressIndicator()), height: 150,),
 
               DrawerListItem(
                 title: Languages.of(context).diary,

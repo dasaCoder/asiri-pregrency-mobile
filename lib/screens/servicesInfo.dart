@@ -26,6 +26,7 @@ class ServicesInfo extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           InkWell(
                             onTap: () {

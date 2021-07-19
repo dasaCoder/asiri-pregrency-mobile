@@ -31,8 +31,11 @@ class _CommunityPageState extends State<CommunityPage> {
   openImportFile() async {
     FilePickerResult result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
-        type: FileType.custom,
-        allowedExtensions: ["jpg", "png", "jpeg"]);
+        type: FileType.image,
+        );
+
+    print("filess");
+    print(result.toString());//allowedExtensions: ["jpg", "png", "jpeg"]
 
     if (result != null) {
       setState(() {
@@ -223,7 +226,7 @@ class _CommunityPageState extends State<CommunityPage> {
               Container(
                 child: StreamBuilder(
                     stream: Provider.of<UserService>(context, listen: false)
-                        .getCommunityPosts(),
+                        .getCommunityPosts(20),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (!snapshot.hasData) {
@@ -231,7 +234,6 @@ class _CommunityPageState extends State<CommunityPage> {
                           child: CircularProgressIndicator(),
                         );
                       } else {
-                        print(snapshot.data.docs.length);
                         return ListView.builder(
                             physics: const AlwaysScrollableScrollPhysics(),
                             shrinkWrap: true,

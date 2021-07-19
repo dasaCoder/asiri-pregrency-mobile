@@ -82,56 +82,7 @@ class _ChatPageState extends State<ChatPage> {
                 ],
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
-                child: Container(
-                  margin: EdgeInsets.only(left: 15, right: 15),
-                  child: StreamBuilder(
-                    stream: Provider.of<UserService>(context, listen: false)
-                        .getMessages(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: Container(
-                            constraints: BoxConstraints(maxWidth: 50, maxHeight: 50),
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      } else {
 
-                        return Container(
-                          child: Column(
-                            children: [
-                              ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  controller: _controller,
-                                  shrinkWrap: true,
-                                  itemCount: snapshot.data.docs.length,
-                                  itemBuilder: (context, index) {
-                                    Message message = Message.fromJson(
-                                        snapshot.data.docs[index].data());
-                                    return Container(
-                                      child: Column(
-                                        children: [
-                                          message.userId == widget.asiriUser.userId
-                                              ? buildOwnMessage(screenSize, message)
-                                              : buildMessageFromSomeone(
-                                                  screenSize, message),
-                                        ],
-                                      ),
-                                    );
-                                  }),
-                            ],
-                          ),
-                        );
-                      }
-                    },
-                  ),
-                ),
-              ),
-            ),
             Container(
               child: Row(
                 children: [
@@ -171,7 +122,7 @@ class _ChatPageState extends State<ChatPage> {
                                     alignLabelWithHint: true,
                                     hintText: "Type your message...",
                                     contentPadding:
-                                        EdgeInsets.only(top: 2, bottom: 2),
+                                    EdgeInsets.only(top: 2, bottom: 2),
                                   )),
                             ],
                           ),
@@ -187,7 +138,60 @@ class _ChatPageState extends State<ChatPage> {
                   )
                 ],
               ),
-            )
+            ),
+
+            Expanded(
+              flex: 1,
+              child: SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.only(left: 15, right: 15),
+                  child: StreamBuilder(
+                    stream: Provider.of<UserService>(context, listen: false)
+                        .getMessages(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: Container(
+                            constraints: BoxConstraints(maxWidth: 50, maxHeight: 50),
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      } else {
+
+                        return Container(
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  reverse: true,
+                                  controller: _controller,
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data.docs.length,
+                                  itemBuilder: (context, index) {
+                                    Message message = Message.fromJson(
+                                        snapshot.data.docs[index].data());
+                                    return Container(
+                                      child: Column(
+                                        children: [
+                                          message.userId == widget.asiriUser.userId
+                                              ? buildOwnMessage(screenSize, message)
+                                              : buildMessageFromSomeone(
+                                                  screenSize, message),
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ),
+
           ],
         ),
       ),

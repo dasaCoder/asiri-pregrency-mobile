@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/lan/Languages.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
+import 'package:mother_and_baby/models/communityPost.dart';
 import 'package:mother_and_baby/screens/kickCounter.dart';
 import 'package:mother_and_baby/screens/months/eighthMonth.dart';
 import 'package:mother_and_baby/screens/months/fifthMonth.dart';
@@ -13,6 +15,7 @@ import 'package:mother_and_baby/screens/months/sixthMonth.dart';
 import 'package:mother_and_baby/screens/months/thirdMonth.dart';
 import 'package:mother_and_baby/screens/servicesInfo.dart';
 import 'package:mother_and_baby/services/user.service.dart';
+import 'package:mother_and_baby/widgets/imageCarousel.dart';
 import 'package:mother_and_baby/widgets/videoPreview.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -248,6 +251,155 @@ class _LandingPageState extends State<LandingPage> {
             ),
           ),
           Divider(),
+
+          Container(
+            child: StreamBuilder(
+                stream: Provider.of<UserService>(context, listen: false)
+                    .getCommunityPosts(5),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        ListView.builder(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.docs.length,
+                            itemBuilder: (context, index) {
+                              CommunityPost post = CommunityPost.fromJson(
+                                  snapshot.data.docs[index].data());
+                              return Container(
+                                margin: EdgeInsets.only(
+                                    top: 5, left: 25, right: 25, bottom: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        post.userData.imageUrl != ""
+                                            ? CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                post.userData.imageUrl))
+                                            : CircleAvatar(
+                                          child: Icon(Icons
+                                              .account_circle_outlined),
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 10.0,
+                                              ),
+                                              child: Text(
+                                                toBeginningOfSentenceCase(
+                                                    widget.asiriUser.name),
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 10.0,
+                                              ),
+                                              child: Text(
+                                                DateFormat("MMMM d, yyyy")
+                                                    .format(DateTime
+                                                    .fromMillisecondsSinceEpoch(
+                                                    post.createdAt)),
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        post.text,
+                                        style: TextStyle(
+                                            fontSize: post.imageList.length > 0
+                                                ? 16
+                                                : 19),
+                                      ),
+                                    ),
+                                    if (post.imageList.length > 0)
+                                      ImageCarousel(
+                                        imageList: post.imageList,
+                                      ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        post.likedUserIdList == null ||
+                                            !post.likedUserIdList.contains(
+                                                widget.asiriUser.userId)
+                                            ? IconButton(
+                                          icon: Icon(
+                                            Icons
+                                                .favorite_border_outlined,
+                                          ),
+                                          onPressed: () => {
+                                            Provider.of<UserService>(
+                                                context,
+                                                listen: false)
+                                                .likePost(
+                                                snapshot.data
+                                                    .docs[index].id,
+                                                widget
+                                                    .asiriUser.userId)
+                                          },
+                                        )
+                                            : IconButton(
+                                          icon: Icon(
+                                            Icons.favorite,
+                                            color: Colors.red,
+                                          ),
+                                          onPressed: () => {
+                                            Provider.of<UserService>(
+                                                context,
+                                                listen: false)
+                                                .unlikePost(
+                                                snapshot.data
+                                                    .docs[index].id,
+                                                widget
+                                                    .asiriUser.userId)
+                                          },
+                                        ),
+                                        Text(
+                                            "${post.likedUserIdList != null ? post.likedUserIdList.length.toString() : 0} likes")
+                                      ],
+                                    ),
+                                    Divider(
+                                      thickness: 1,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+
+
+                      ],
+                    );
+                  }
+                }),
+          ),
+
           VideoPreview(
             iconName: "Dental.jpg",
             text: Languages.of(context).specialistCaption1,
