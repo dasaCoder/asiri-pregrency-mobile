@@ -11,23 +11,13 @@ import 'package:mother_and_baby/screens/months/thirdMonth.dart';
 
 class MonthSliderWidget extends StatelessWidget {
   MonthSliderWidget({
-    Key key, @required this.selectedMonth,
+    Key key, @required this.selectedMonth, this.toggleNext, this.togglePrev,
   }) : super(key: key);
 
   final Color  lightBlue = Color.fromRGBO(59, 186, 234, 1.0);
   final int selectedMonth;
-
-  void nextMonth(BuildContext context) {
-    if((selectedMonth+1) < 10) {
-      goToMonthDescription(context, selectedMonth+1);
-    }
-  }
-
-  void prevMonth(BuildContext context) {
-    if((selectedMonth-1) > 0) {
-      goToMonthDescription(context, selectedMonth-1);
-    }
-  }
+  final VoidCallback toggleNext;
+  final VoidCallback togglePrev;
 
   void goToMonthDescription(BuildContext context, int month) {
     switch (month) {
@@ -82,7 +72,7 @@ class MonthSliderWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           InkWell(
-            onTap: () => {prevMonth(context)},
+            onTap: () => {togglePrev()},
             child: Icon(
               Icons.arrow_left_rounded,
               size: 80,
@@ -96,7 +86,7 @@ class MonthSliderWidget extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () => {nextMonth(context)},
+            onTap: () => {toggleNext()},
             child: Icon(
               Icons.arrow_right_rounded,
               size: 80,
