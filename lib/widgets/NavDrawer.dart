@@ -6,6 +6,7 @@ import 'package:mother_and_baby/main.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
 import 'package:mother_and_baby/screens/diary.dart';
 import 'package:mother_and_baby/screens/home.dart';
+import 'package:mother_and_baby/screens/kickCounter.dart';
 import 'package:mother_and_baby/screens/midWifePage.dart';
 import 'package:mother_and_baby/screens/excersicePage.dart';
 import 'package:mother_and_baby/screens/reminders/reminders.dart';
@@ -109,6 +110,13 @@ class _NavDrawerState extends State<NavDrawer> {
               builder: (BuildContext context) => ServicesInfo()));
         }
         break;
+      case "KICK_COUNTER": {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => KickCounter(
+              asiriUser: asiriUser,
+            )));
+      }
+      break;
       default:
         {
           Navigator.of(context).push(MaterialPageRoute(
@@ -220,6 +228,11 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   ),
                 ],
+              ),
+              DrawerListItem(
+                title: "Kick Counter",
+                imagePath: "consultant.png",
+                onClicked: () => navigateToPage(context, "KICK_COUNTER"),
               ),
               DrawerListItem(
                 title: Languages.of(context).community,

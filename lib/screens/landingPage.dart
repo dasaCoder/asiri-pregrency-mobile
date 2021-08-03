@@ -136,9 +136,11 @@ class _LandingPageState extends State<LandingPage> {
       Provider.of<UserService>(context, listen: false)
           .getUser(widget.asiriUser.userId)
           .then((user) {
-        setState(() {
-          userDatails = user;
-        });
+            if(mounted) {
+              setState(() {
+                userDatails = user;
+              });
+            }
       });
     }
 

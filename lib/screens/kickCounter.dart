@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mother_and_baby/models/asiriUser.dart';
 import 'package:mother_and_baby/services/user.service.dart';
@@ -16,16 +17,33 @@ class _KickCounterState extends State<KickCounter> {
   int kickCount = 0;
   @override
   void initState() {
-    Provider.of<UserService>(context, listen: false)
-        .getUser(widget.asiriUser.userId)
-        .then((userData) {
-      setState(() {
-        updatableAsiriUser = userData;
-        kickCount = updatableAsiriUser.kickCount != null
-            ? updatableAsiriUser.kickCount
-            : 0;
+    if(widget.asiriUser == null || widget.asiriUser.userId == "" ) {
+      print("widget user is null");
+      String uuid = Provider.of<User>(context).uid;
+      Provider.of<UserService>(context).getUser(uuid).then((value) {
+        Provider.of<UserService>(context, listen: false)
+            .getUser(widget.asiriUser.userId)
+            .then((userData) {
+          setState(() {
+            updatableAsiriUser = userData;
+            kickCount = updatableAsiriUser.kickCount != null
+                ? updatableAsiriUser.kickCount
+                : 0;
+          });
+        });
       });
-    });
+    } else {
+      Provider.of<UserService>(context, listen: false)
+          .getUser(widget.asiriUser.userId)
+          .then((userData) {
+        setState(() {
+          updatableAsiriUser = userData;
+          kickCount = updatableAsiriUser.kickCount != null
+              ? updatableAsiriUser.kickCount
+              : 0;
+        });
+      });
+    }
   }
 
   @override
