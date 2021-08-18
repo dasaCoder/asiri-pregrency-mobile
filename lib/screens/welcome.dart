@@ -15,10 +15,12 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User>(context, listen: false);
-    var timer = Timer(Duration(seconds: 2), ()=> {
-      // Navigator.of(context).push(
-      //     MaterialPageRoute(builder: (BuildContext context) => HomeScreen()))
+    var timer = Timer(Duration(seconds: 3), ()=> {
       if(firebaseUser == null) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (BuildContext context) => LoginScreen()))
@@ -28,11 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       }
 
     });
-    // timer.cancel();
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Color.fromRGBO(254, 226, 233, 1),

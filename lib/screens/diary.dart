@@ -89,6 +89,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   onDaySelected: (selectedDay, focusedDay) {
                     if (!isSameDay(_selectedDay, selectedDay)) {
                       // Call `setState()` when updating the selected day
+                      print(selectedDay.day);
+                      print(focusedDay);
                       setState(() {
                         _selectedDay = selectedDay;
                         _focusedDay = focusedDay;
