@@ -38,14 +38,14 @@ dependencies:
   provider: ^5.0.0
   cloud_firestore: ^2.2.0
   table_calendar: ^3.0.0
-  file_picker: ^3.0.3
+#  file_picker: ^3.0.3
   firebase_storage: ^8.1.0
   flutter_rating_bar: ^4.0.0
   rxdart: ^0.27.1
   awesome_notifications: ^0.0.6+7
   chewie: ^1.0.0
   carousel_slider: ^3.0.0
-  flutter_facebook_auth: ^3.0.0
+#  flutter_facebook_auth: ^3.0.0
   google_sign_in: ^5.0.4
   url_launcher: ^6.0.9
 

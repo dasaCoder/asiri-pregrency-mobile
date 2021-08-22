@@ -156,15 +156,15 @@ class _NavDrawerState extends State<NavDrawer> {
                   ],
                 ),
               ),
-              asiriUser != null ? Stack(
+              Stack(
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: asiriUser.imageUrl == "" ? Image.asset(
+                    child: Image.asset(
                       "assets/images/drawer/avatar.png",
                       height: 150,
                       width: 150,
-                    ) : Image.network(asiriUser.imageUrl, height: 150, width: 150,),
+                    )// : Image.network(asiriUser.imageUrl, height: 150, width: 150,),
                   ),
                   Positioned(
                     right: 50,
@@ -179,7 +179,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   )
                 ],
-              ) : SizedBox(child: Center(child: CircularProgressIndicator()), height: 150,),
+              ), //: SizedBox(child: Center(child: CircularProgressIndicator()), height: 150,),
 
               DrawerListItem(
                 title: Languages.of(context).diary,

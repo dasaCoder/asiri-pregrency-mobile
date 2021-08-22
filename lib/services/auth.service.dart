@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationService {
@@ -12,7 +12,7 @@ class AuthenticationService {
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
-    await FacebookAuth.instance.logOut();
+    // await FacebookAuth.instance.logOut();
     await GoogleSignIn().signOut();
   }
 
@@ -63,28 +63,28 @@ class AuthenticationService {
     return _firebaseAuth.signInWithCredential(credential);
   }
 
-  Future<UserCredential> signInWithFacebook() async {
-    FacebookAuth facebookAuth = FacebookAuth.instance;
-    bool isLogged = await facebookAuth.accessToken != null;
-    if (!isLogged) {
-      LoginResult result = await facebookAuth
-          .login(); // by default we request the email and the public profile
-      if (result.status == LoginStatus.success) {
-        // you are logged
-        AccessToken token = await facebookAuth.accessToken;
-        UserCredential authResult = await _firebaseAuth
-            .signInWithCredential(
-            FacebookAuthProvider.credential(token.token));
-        return authResult;
-      }
-    } else {
-      AccessToken token = await facebookAuth.accessToken;
-      UserCredential authResult = await _firebaseAuth
-          .signInWithCredential(
-          FacebookAuthProvider.credential(token.token));
-      return authResult;
-    }
-  }
+  // Future<UserCredential> signInWithFacebook() async {
+  //   FacebookAuth facebookAuth = FacebookAuth.instance;
+  //   bool isLogged = await facebookAuth.accessToken != null;
+  //   if (!isLogged) {
+  //     LoginResult result = await facebookAuth
+  //         .login(); // by default we request the email and the public profile
+  //     if (result.status == LoginStatus.success) {
+  //       // you are logged
+  //       AccessToken token = await facebookAuth.accessToken;
+  //       UserCredential authResult = await _firebaseAuth
+  //           .signInWithCredential(
+  //           FacebookAuthProvider.credential(token.token));
+  //       return authResult;
+  //     }
+  //   } else {
+  //     AccessToken token = await facebookAuth.accessToken;
+  //     UserCredential authResult = await _firebaseAuth
+  //         .signInWithCredential(
+  //         FacebookAuthProvider.credential(token.token));
+  //     return authResult;
+  //   }
+  // }
 
   String getMessageFromErrorCode(error) {
     switch (error.code) {
