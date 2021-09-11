@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 class DiaryDataWidget extends StatelessWidget {
   final String uuid;
 
+
   const DiaryDataWidget({
     Key key, @required this.uuid,
   }) : super(key: key);
