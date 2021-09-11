@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>616361179202-vvi2uroon2krh7s22j1j8b3kkocul6s3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.616361179202-vvi2uroon2krh7s22j1j8b3kkocul6s3</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>616361179202-beidujv5kbp7hnfmlev0sjddm4ojrflr.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAwgIM59C8C7QgbIJZ6ItRIgRYbkK49k1g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>616361179202</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.burbs.motherbaby</string>
+	<key>PROJECT_ID</key>
+	<string>asiri-hospital-tour</string>
+	<key>STORAGE_BUCKET</key>
+	<string>asiri-hospital-tour.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:616361179202:ios:732fab6b435e3aaf4355db</string>
+	<key>DATABASE_URL</key>
+	<string>https://asiri-hospital-tour.firebaseio.com</string>
+</dict>
+</plist>
