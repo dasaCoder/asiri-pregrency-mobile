@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -30,22 +31,22 @@ class _CommunityPageState extends State<CommunityPage> {
   List<CommunityPost> communityPostList = <CommunityPost>[];
   AsiriUser userData;
   openImportFile() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles(
-        allowMultiple: true,
-        type: FileType.image,
-        );
-
-    print("filess");
-    print(result.toString());//allowedExtensions: ["jpg", "png", "jpeg"]
-
-    if (result != null) {
-      setState(() {
-        _selectedImages.addAll(result.paths.map((path) => File(path)).toList());
-      });
-      print(_selectedImages);
-    } else {
-      // User canceled the picker
-    }
+    // FilePickerResult result = await FilePicker.platform.pickFiles(
+    //     allowMultiple: true,
+    //     type: FileType.image,
+    //     );
+    //
+    // print("filess");
+    // print(result.toString());//allowedExtensions: ["jpg", "png", "jpeg"]
+    //
+    // if (result != null) {
+    //   setState(() {
+    //     _selectedImages.addAll(result.paths.map((path) => File(path)).toList());
+    //   });
+    //   print(_selectedImages);
+    // } else {
+    //   // User canceled the picker
+    // }
   }
 
   Future uploadImageToFirebase(File imageFile) async {

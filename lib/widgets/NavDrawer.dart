@@ -164,11 +164,11 @@ class _NavDrawerState extends State<NavDrawer> {
                   ],
                 ),
               ),
-              Stack(
+              asiriUser != null ? Stack(
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: asiriUser == null || asiriUser.imageUrl == "" ? Image.asset(
+                    child: asiriUser.imageUrl == "" ? Image.asset(
                       "assets/images/drawer/avatar.png",
                       height: 150,
                       width: 150,
@@ -187,7 +187,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   )
                 ],
-              ),
+              ) : SizedBox(child: Center(child: CircularProgressIndicator()), height: 150,),
 
               DrawerListItem(
                 title: Languages.of(context).diary,
