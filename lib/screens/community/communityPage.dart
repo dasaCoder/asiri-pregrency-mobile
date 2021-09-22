@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ import 'package:intl/intl.dart';
 class CommunityPage extends StatefulWidget {
   final AsiriUser asiriUser;
 
-  const CommunityPage({Key key, this.asiriUser}) : super(key: key);
+  const CommunityPage({Key key, @required this.asiriUser}) : super(key: key);
   @override
   _CommunityPageState createState() => _CommunityPageState();
 }
@@ -27,7 +28,7 @@ class _CommunityPageState extends State<CommunityPage> {
   var _form = GlobalKey<FormState>();
   bool showProgressBar = false;
   List<CommunityPost> communityPostList = <CommunityPost>[];
-
+  AsiriUser userData;
   openImportFile() async {
     FilePickerResult result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
@@ -72,8 +73,8 @@ class _CommunityPageState extends State<CommunityPage> {
     }
 
     CommunityPost post = CommunityPost(txtController.text, downloadUrls,
-        widget.asiriUser.userId, DateTime.now().millisecondsSinceEpoch);
-    post.userData = widget.asiriUser;
+        userData.userId, DateTime.now().millisecondsSinceEpoch);
+    post.userData = userData;
     Provider.of<UserService>(context, listen: false).saveCommunityPost(post);
     setState(() {
       _selectedImages = [];
@@ -87,6 +88,7 @@ class _CommunityPageState extends State<CommunityPage> {
   @override
   void initState() {
     loadPosts(this.context);
+    userData = widget.asiriUser;
   }
 
   @override
@@ -270,7 +272,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                               ),
                                               child: Text(
                                                 toBeginningOfSentenceCase(
-                                                    widget.asiriUser.name),
+                                                    post.userData.name),
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                 ),
@@ -313,11 +315,11 @@ class _CommunityPageState extends State<CommunityPage> {
                                     SizedBox(
                                       height: 5,
                                     ),
-                                    Row(
+                                    userData != null ? Row(
                                       children: [
                                         post.likedUserIdList == null ||
                                                 !post.likedUserIdList.contains(
-                                                    widget.asiriUser.userId)
+                                                    userData.userId)
                                             ? IconButton(
                                                 icon: Icon(
                                                   Icons
@@ -353,7 +355,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                         Text(
                                             "${post.likedUserIdList != null ? post.likedUserIdList.length.toString() : 0} likes")
                                       ],
-                                    ),
+                                    ) : Container(),
                                     Divider(
                                       thickness: 1,
                                     ),

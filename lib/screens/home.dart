@@ -5,6 +5,7 @@ import 'package:mother_and_baby/screens/Login.dart';
 import 'package:mother_and_baby/screens/community/chatPage.dart';
 import 'package:mother_and_baby/screens/community/communityPage.dart';
 import 'package:mother_and_baby/screens/diary.dart';
+import 'package:mother_and_baby/screens/pregantDateScreen.dart';
 import 'package:mother_and_baby/screens/reminders/addReminders.dart';
 import 'package:mother_and_baby/screens/landingPage.dart';
 import 'package:mother_and_baby/screens/reminders/reminders.dart';
@@ -42,10 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (BuildContext context) => LoginScreen()));
         }
-        setState(() {
-          asiriUser = userData;
-          currentMonth = calculateCurrentMonth(DateTime.fromMillisecondsSinceEpoch(asiriUser.pregnantStartDate));
-        });
+        if(userData.pregnantStartDate != null) {
+          setState(() {
+            asiriUser = userData;
+            currentMonth = calculateCurrentMonth(DateTime.fromMillisecondsSinceEpoch(userData.pregnantStartDate));
+          });
+        } else {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (BuildContext context) => PregnantDateScreen()));
+        }
+
       });
     } on Exception catch (e) {
       print(e);

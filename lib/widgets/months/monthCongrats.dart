@@ -104,7 +104,7 @@ class MonthCongratsWidget extends StatelessWidget {
           SizedBox(
             height: 25,
           ),
-          if (userDatails != null)
+          if (userDatails != null && userDatails.dueDate != null)
             Text(
               "Your due date is ${DateFormat("MMMM d, yyyy").format(DateTime.fromMillisecondsSinceEpoch(userDatails.dueDate))}",
               style: TextStyle(color: Colors.white, fontSize: 14),

@@ -246,7 +246,6 @@ class _LandingPageState extends State<LandingPage> {
   Column loadMonthDetails(Size screenSize, BuildContext context, AsiriUser userDetails, int currentMonth) {
     return Column(
       children: [
-        SizedBox(height: 10,),
         MonthCongratsWidget(screenSize: screenSize, userDatails: userDetails, currentMonth: currentMonth,),
         SizedBox(height: 20,),
         Center(
