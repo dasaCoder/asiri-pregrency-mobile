@@ -42,7 +42,7 @@ class _VideoAppState extends State<VideoApp> {
       if (!videoPlayerValue.isPlaying &&
           videoPlayerValue.position.inSeconds >=
               videoPlayerValue.duration.inSeconds) {
-        Navigator.of(context).pop();
+        Navigator.of(context).maybePop();
       }
       setState(() {});
     });
