@@ -96,7 +96,7 @@ class UserService {
   /// this includes, notes, weight & temperature etc
   Future<DocumentReference> saveDiaryData(DiaryData diaryData) {
     diaryData.createdAt = DateTime.now().millisecondsSinceEpoch;
-    print("user is " + diaryData.userId);
+    // print("user is " + diaryData.userId);
     diaryData.date = diaryData.data['date'];
     return _firestoreInstance.collection("diary_data").add(diaryData.toJson());
   }
