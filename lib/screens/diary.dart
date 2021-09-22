@@ -89,7 +89,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   onDaySelected: (selectedDay, focusedDay) {
                     if (!isSameDay(_selectedDay, selectedDay)) {
                       // Call `setState()` when updating the selected day
-                      print(selectedDay.day);
+                      // print("selected day" + DateFormat("yyyy-MM-dd").format(selectedDay));
                       print(focusedDay);
                       setState(() {
                         _selectedDay = selectedDay;
@@ -113,7 +113,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 /**
                  * Diary details for date
                  */
-                DiaryDataWidget(uuid: userId,),
+                DiaryDataWidget(uuid: userId, selectedDate: DateFormat("yyyy-MM-dd").format(_selectedDay),),
 
                 Container(
                   decoration: new BoxDecoration(

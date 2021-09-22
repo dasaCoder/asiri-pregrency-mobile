@@ -1,14 +1,15 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=D:\flutter_windows_2.0.5-stable\flutter
-FLUTTER_APPLICATION_PATH=C:\Users\dilusha.dasanayake\StudioProjects\asiri-pregrency-mobile
+FLUTTER_ROOT=/Users/dilushadasanayaka/Documents/burbs/flutter
+FLUTTER_APPLICATION_PATH=/Users/dilushadasanayaka/AndroidStudioProjects/mother_and_baby
 COCOAPODS_PARALLEL_CODE_SIGN=true
-FLUTTER_TARGET=lib\main.dart
+FLUTTER_TARGET=/Users/dilushadasanayaka/AndroidStudioProjects/mother_and_baby/lib/main.dart
 FLUTTER_BUILD_DIR=build
-SYMROOT=${SOURCE_ROOT}/../build\ios
+SYMROOT=${SOURCE_ROOT}/../build/ios
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
 EXCLUDED_ARCHS[sdk=iphonesimulator*]=arm64 i386
+DART_DEFINES=Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl,RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==
 DART_OBFUSCATION=false
-TRACK_WIDGET_CREATION=false
+TRACK_WIDGET_CREATION=true
 TREE_SHAKE_ICONS=false
-PACKAGE_CONFIG=.packages
+PACKAGE_CONFIG=/Users/dilushadasanayaka/AndroidStudioProjects/mother_and_baby/.dart_tool/package_config.json

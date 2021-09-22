@@ -102,13 +102,15 @@ class UserService {
   }
 
   Stream<QuerySnapshot<dynamic>> getDiaryData(String uuid, String date) {
+    print("date"+date);
     DateTime now = DateTime.now();
     var beginningDate = DateTime(now.year, now.month, now.day).millisecondsSinceEpoch;
     print(beginningDate);
     return _firestoreInstance
         .collection("diary_data")
         .where("userId", isEqualTo: uuid)
-        .where("createdAt", isGreaterThanOrEqualTo: beginningDate)
+        .where("date",isEqualTo: date)
+        // .where("createdAt", isGreaterThanOrEqualTo: beginningDate)
         .snapshots();
   }
 

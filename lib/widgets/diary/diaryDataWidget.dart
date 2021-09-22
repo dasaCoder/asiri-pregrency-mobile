@@ -9,14 +9,15 @@ import 'package:provider/provider.dart';
 
 class DiaryDataWidget extends StatelessWidget {
   final String uuid;
-
+  final String selectedDate;
 
   const DiaryDataWidget({
-    Key key, @required this.uuid,
+    Key key, @required this.uuid, this.selectedDate,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print("selected date " + selectedDate);
     return Container(
       decoration: BoxDecoration(
         color: Color.fromRGBO(230, 242, 255, 1.0),
@@ -28,7 +29,7 @@ class DiaryDataWidget extends StatelessWidget {
         children: [
           /// Life Style data
           StreamBuilder(
-              stream: Provider.of<UserService>(context).getDiaryData(uuid, ""),
+              stream: Provider.of<UserService>(context).getDiaryData(uuid, selectedDate),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 double temp = 0;
